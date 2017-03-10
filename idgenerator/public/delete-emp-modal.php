@@ -1,4 +1,4 @@
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="deleteUser">
+<div class="modal fade bs-example-modal-lg" tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel" id="deleteEmployee" aria-hidden="true">
   <div class="modal-dialog modal-md ">
       <div class="modal-body gray-bg no-brd no-mg no-bx-sdw gray-text pd-t-20">
           <i class="fa fa-trash fz-18 mg-r-10 mg-l-10" aria-hidden="true"></i>Are you sure you want to delete this user?
