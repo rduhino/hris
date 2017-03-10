@@ -75,7 +75,7 @@
 				<div class="emp-img-con">
 					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg" alt="" employee-avatar>
 					<div class="id-nmbr"> {{employee.number}} </div>
-					<div class="emp-status orange-bg fz-12 fw-reg"> Inactive </div>
+					<div class="emp-status green-bg fz-12 fw-reg"> Active </div>
 				</div>
 
 				<div class="emp-info-con">
