@@ -3,11 +3,15 @@
 
     <div class="modal-content no-brd bd-rd-none pd-20 no-bx-sdw">
 
-		<div class="view-emp-con">
-	    <div class="white-bg">
-	 		<div class="clearfix"></div>
-			<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-		</div>
+		
+    <div class="white-bg">
+ 		<div class="clearfix"></div>
+		<button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-remove"></i></span></button>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="view-emp-con">
 	     <form action="upload.php" method="post" enctype="multipart/form-data">
 	        <label class="img-uploader-thumb mg-t-20">
 	            <input id="inputImage2"

@@ -72,11 +72,11 @@
 		<div class="clearfix"></div>
 		<div class="separator mg-tb-20"></div>
       <!-- User Box -->
-			<div class="emp-list-box" ng-repeat = "employee in employees">
-				<div class="emp-img-con">
+			<div class="emp-list-box" ng-repeat="employee in employees">
+				<div class="emp-img-con" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)">
 					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg" alt="" employee-avatar>
 					<div class="id-nmbr"> {{employee.number}} </div>
-					<div class="del-emp" ng-click="DeleteEmployee(employee.number)" > <i class="fa fa-trash white fz-18"></i> </div>
+					<div class="del-emp" ng-click="DeleteEmployee(employee.number)" data-toggle="tooltip" title="Delete Employee" data-placement="right"> <i class="fa fa-trash white fz-18"></i> </div>
 				</div>
 
 				<div class="emp-info-con">
@@ -96,7 +96,7 @@
 					</div>
 
 					<div class="actions-con mg-b-10">
-						<button class="pd-10 fz-10 fw-reg w100 card-btn gray-text white" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> VIEW FULL INFORMATION </button>
+						<button class="pd-10 fz-10 fw-reg w100 card-btn gray-text white"> <i class="fa fa-eye mg-r-5"></i> VIEW FULL INFORMATION </button>
 					</div>
 				</div>
 			</div>
@@ -125,6 +125,12 @@
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/app.js"></script>
 
+    <script>
+    	$(document).ready(function(){
+    		$('[data-toggle="tooltip"]').tooltip();
+    	});
+    </script>
+	
     <script>
         new WOW().init();
     </script>
