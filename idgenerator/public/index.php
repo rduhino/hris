@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="upload/verticalops.png">
+    <link rel="icon" href="assets/images/favicon.png">
 
     <title>HRIS</title>
 
@@ -22,7 +22,7 @@
 <notification alert-data="notifConfig"></notification>
 <div class="nav-hdr">
 	<div class="col-md-6">
-		<img src="assets/images/vops-white-logo.png" alt="">
+		<img src="assets/images/vops-white-logo.png" alt="" style="width: 168px; height: 30px;">
 	</div>
 
 	<div class="col-md-6">
@@ -75,7 +75,7 @@
 				<div class="emp-img-con">
 					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg" alt="" employee-avatar>
 					<div class="id-nmbr"> {{employee.number}} </div>
-					<div class="del-emp" ng-click="DeleteEmployee(employee.number)" data-toggle="tooltip" title="Delete Employee" data-placement="right"> <i class="fa fa-trash white fz-18"></i> </div>
+					<div class="emp-status orange-bg fz-12 fw-reg"> Inactive </div>
 				</div>
 
 				<div class="emp-info-con">
@@ -93,7 +93,11 @@
 						<a href="bank.php?p=front&&id={{employee.number}}" target="_blank"><button class="pd-tb-10 pd-lr-5 fz-10 fw-reg act-btn blue-bg no-brd white"> <i class="fa fa-print mg-r-5"></i>PRINT FRONT </button></a>
 						<a href="bank.php?p=back&&id={{employee.number}}" target="_blank"><button class="pd-tb-10 pd-lr-5 fz-10 fw-reg act-btn torquoise-bg no-brd white"> <i class="fa fa-print mg-r-5"></i>PRINT BACK </button></a>
 					</div>
-					<div class="actions-con mg-b-10"><button class="pd-tb-10 pd-lr-5 fz-10 fw-reg w100 card-btn gray-text" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> VIEW FULL INFORMATION </button>
+
+					<div class="actions-con mg-b-10">
+						<button class="fw-reg text-center act-btn card-btn gray-text white" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> VIEW </button>
+
+						<button class="fw-reg text-center act-btn card-btn gray-text white"> <i class="fa fa-fire mg-r-5"></i> DEACTIVATE </button>
 					</div>
 				</div>
 			</div>

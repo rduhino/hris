@@ -190,7 +190,7 @@ ul.sidebar-mnu a:hover, .current i {
 }
 
 .nav-hdr img {
-  width: 18%;
+  width: 16%;
 }
 
 .emp-list-con {
@@ -259,7 +259,7 @@ ul.sidebar-mnu a:hover, .current i {
   padding: 5px;
   margin:10px 0;
   font-size: 12px;
-  width: 85px;
+  width: 100px;
   text-align: center;
   font-weight: bold;
   color: #ffffff;
@@ -269,18 +269,19 @@ ul.sidebar-mnu a:hover, .current i {
   /*border-radius: 5px;*/
 }
 
-.del-emp {
-  background: #f26c4f;
-  border-radius: 5px;
-  padding: 5px 7px;
+.emp-status {
+  position: absolute;
   margin:10px 0;
+  padding: 5px 7px;
+  width: 70px;
   font-size: 10px;
   text-align: center;
   font-weight: bold;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   color: #ffffff;
-  position: absolute;
   top:0;
-  right:10px;
+  right:0;
   z-index: 1;
   cursor: pointer;
   /*border-radius: 5px;*/
@@ -299,6 +300,8 @@ button.card-btn {
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
   outline: none;
+  font-size: 10px;
+  padding:8px 8px;
 }
 
 button.card-btn:hover {

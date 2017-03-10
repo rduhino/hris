@@ -36,6 +36,7 @@
 				<div class="clearfix"></div>
 
 				<div class="separator"></div>
+
 			    <div class="col-md-6 mg-t-20 no-pd">
 
 		    		<p class="gray-text fz-12 fw-bld no-mg"> COMPLETE ADDRESS:</p>
@@ -50,13 +51,20 @@
 	  			 	<p class="gray-text fz-12 fw-bld no-mg"> TIN NO.:</p>
 	  			 	<p class="fw-reg fz-12 gray-text">{{view.employee.tin}}</p>
 			    </div>
-			    <div class="col-md-6 mg-t-20 no-pd">
 
-	          <p class="gray-text fz-12 fw-bld no-mg"> Emergency Person's Name:</p>
+		    	<div class="col-md-6 mg-t-20 no-pd">
+
+	          		<p class="gray-text fz-12 fw-bld no-mg"> Emergency Person's Name:</p>
 	  			 	<p class="fw-reg fz-12 gray-text">{{view.employee.emergency_name}}</p>
 
-	  	    	<p class="gray-text fz-12 fw-bld no-mg"> Emergency Person's Contact Number:</p>
+	  	    		<p class="gray-text fz-12 fw-bld no-mg"> Emergency Person's Contact Number:</p>
 	  			 	<p class="fw-reg fz-12 gray-text">{{view.employee.emergency_number}}</p>
+
+	  			 	<p class="gray-text fz-12 fw-bld no-mg"> Date Hired:</p>
+	  			 	<p class="fw-reg fz-12 gray-text"> June 16, 2010 </p>
+
+	  			 	<p class="gray-text fz-12 fw-bld no-mg"> Absences/Leave:</p>
+	  			 	<p class="fw-reg fz-12 gray-text"> 01 / 12 </p>
 			    </div>
 		    </div>
 
