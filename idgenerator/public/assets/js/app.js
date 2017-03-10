@@ -116,8 +116,8 @@
       return {
           restrict: 'E',
           template:"<div class='notification-box-{{alertData.type}}' ng-class='{ \"show-notification\" : alertData.show == 1 }'   ng-if='alertData.show'>" +
-                   '<p class="no-mg-pd"> <i class="fa fa-check green fz-14 mg-r-5" ng-class="{ \'fa-check green\' : alertData.type == \'success\' , \'fa-times orange\' : alertData.type == \'error\' }"> </i>{{alertData.head}}</p> ' +
-                   '<p class="gray-text no-mg-pd">{{alertData.message}}</p> ' +
+                   '<p class="no-mg-pd"> <i class="fa fa-check green fz-18 mg-r-5" ng-class="{ \'fa-check green\' : alertData.type == \'success\' , \'fa-times orange\' : alertData.type == \'error\' }"> </i>{{alertData.head}}</p> ' +
+                   '<p class="gray-text no-mg-pd fz-12">{{alertData.message}}</p> ' +
                    "</div>",
           scope:{
             alertData:"="
@@ -244,22 +244,22 @@
           var skip = false;
 
           if(typeof $scope.employees[$scope.add.employee.number] != 'undefined' ){
-            msg = "User already exist";
+            msg = "Employee already exist!";
             skip = true;
           }
 
           if(!skip && !$scope.add.employee.avatar){
-            msg =  'Please Add Avatar',
+            msg =  'Please Upload an ID Picture!',
             skip = true;
           }
 
           if(!skip && !$scope.add.employee.signature){
-            msg =  'Please Add Avatar',
+            msg =  'Please Upload an ID Picture!',
             skip = true;
           }
 
           if(!skip && $scope.add.employee.number == 'GWO-'){
-            msg =  'Please Add Employee Number',
+            msg =  'Please Add Employee ID Number',
             skip = true;
           }
 

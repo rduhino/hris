@@ -22,11 +22,19 @@
 <notification alert-data="notifConfig"></notification>
 <div class="nav-hdr">
 	<div class="col-md-6">
-		<img src="images/vops-white-logo.png" alt="">
+		<img src="assets/images/vops-white-logo.png" alt="">
 	</div>
 
 	<div class="col-md-6">
 
+		<a href=""><button class="blue-bg opac-80 white pd-tb-5 pd-lr-20 fz-12 no-brd pull-right fw-reg bd-rd-50"> LOGOUT </button></a>
+
+		<div class="pull-right mg-r-20">
+			<div class="user-img-con pull-right">
+				<img src="assets/images/anne.jpg" alt="">
+			</div>
+			<p class="pull-right white fw-light fz-12 mg-r-10 lh-25 mg-tb-0"> Admin </p>
+		</div>
 	</div>
 </div>
 
@@ -68,6 +76,7 @@
 				<div class="emp-img-con">
 					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg" alt="" employee-avatar>
 					<div class="id-nmbr"> {{employee.number}} </div>
+					<div class="del-emp" ng-click="DeleteEmployee(employee.number)" > <i class="fa fa-trash white fz-18"></i> </div>
 				</div>
 
 				<div class="emp-info-con">
@@ -89,26 +98,23 @@
 					<div class="actions-con mg-b-10">
 						<button class="pd-10 fz-10 fw-reg w100 card-btn gray-text white" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> VIEW FULL INFORMATION </button>
 					</div>
-          <div class="actions-con">
-						<button class="pd-10 fz-10 fw-reg w100 card-btn gray-text white" ng-click="DeleteEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> DELETE USER </button>
-					</div>
 				</div>
 			</div>
 
       <?php include 'view-emp-info-modal.php'; ?>
       <?php include 'add-emp-modal.php'; ?>
-
-      <div id="deleteUser" class="modal fade bd-rd-none">
-          <div class="modal-dialog modal-md ">
-              <div class="modal-body gray-bg no-brd no-mg no-bx-sdw gray-text pd-t-20">
-                  <i class="fa fa-trash fz-18 mg-r-10 mg-l-10" aria-hidden="true"></i>Are you sure you want to delete this user?
-              </div>
-              <div class="modal-footer gray-bg no-brd no-mg no-bx-sdw pd-15">
-                  <button type="button" class="orange-bg pd-tb-10 pd-lr-30 text-center white no-brd" id="delete">Delete</button>
-                  <button type="button" data-dismiss="modal" class="blue-bg pd-tb-10 pd-lr-30 text-center white no-brd">Cancel</button>
-              </div>
-          </div>
-      </div>
+		
+	      <div id="deleteUser" class="modal fade bd-rd-none">
+	          <div class="modal-dialog modal-md ">
+	              <div class="modal-body gray-bg no-brd no-mg no-bx-sdw gray-text pd-t-20">
+	                  <i class="fa fa-trash fz-18 mg-r-10 mg-l-10" aria-hidden="true"></i>Are you sure you want to delete this user?
+	              </div>
+	              <div class="modal-footer gray-bg no-brd no-mg no-bx-sdw pd-15">
+	                  <button type="button" class="orange-bg pd-tb-10 pd-lr-30 text-center white no-brd" id="delete">Delete</button>
+	                  <button type="button" data-dismiss="modal" class="blue-bg pd-tb-10 pd-lr-30 text-center white no-brd">Cancel</button>
+	              </div>
+	          </div>
+	      </div>
 		</div>
 	</div>
 </div>
