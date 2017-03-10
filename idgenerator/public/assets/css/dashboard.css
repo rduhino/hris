@@ -1,0 +1,374 @@
+/*
+ * Base structure
+ */
+
+@font-face {
+    font-family: 'Montserrat-Black';
+    src: url('../fonts/Montserrat-Black.otf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('../fonts/Montserrat-Bold.otf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/Montserrat-Regular.otf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url('../fonts/Montserrat-Light.otf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Hairline';
+    src: url('../fonts/Montserrat-Hairline.otf');
+}
+
+@font-face {
+    font-family: 'HelveticaNeueLTStd-Lt';
+    src: url('../fonts/HelveticaNeueLTStd-Lt.otf');
+}
+
+
+@font-face {
+    font-family: 'HelveticaNeueLTStd-UltLt';
+    src: url('../fonts/HelveticaNeueLTStd-UltLt.otf');
+}
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  overflow-x: hidden;
+  font-family: 'Montserrat-Light';
+}
+
+/*Checkbox Input Styles Here
+=============================*/
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+  display: inline;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  display: inline;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  border: 2px solid #ccc;
+  background: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  transition: all .2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: '•';
+    position: absolute;
+    top: -29px;
+    left: -2px;
+    font-size: 75px;
+    line-height: 0.8;
+    color: #4c94e5;
+    transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+
+label {
+  font-family: 'Montserrat-Light' !important;
+}
+/* accessibility */
+/*[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 2px solid blue;
+}*/
+
+/* hover style just for information */
+/*label:hover:before {
+  border: 2px solid #4778d9!important;
+}*/
+
+/*End of Checkbox Styles*/
+
+.nav-sidebar {
+  width: calc(100% - 85%);
+  float:left;
+  background:#19242d;
+  position: fixed;
+  height: 100%;
+  top:0;
+  padding:10px;
+  box-shadow: inset 2px 2px 5px #010d1b;
+}
+
+ul.sidebar-mnu {
+  margin:0;
+  padding:0;
+  list-style-type: none;
+  color: #fff;
+  margin-top: 80px;
+}
+
+ul.sidebar-mnu a {
+  padding: 10px 20px;
+  margin:0;
+  font-family: 'Montserrat-Regular';
+  font-size: 12px;
+  display: block;
+  color: #90a9c5;
+}
+
+ul.sidebar-mnu a {
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  outline: 0;
+}
+
+ul.sidebar-mnu a:hover, .current {
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+ul.sidebar-mnu a:hover, .current i {
+  color: #1ABC9B;
+}
+
+.nav-hdr {
+  background: #4c94e5;
+  border-bottom: 5px solid #2d71be;
+  padding: 10px 0;
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 999;
+}
+
+.nav-hdr img {
+  width: 15%;
+}
+
+.emp-list-con {
+  padding:20px;
+  margin:0;
+  width: calc(100% - 15%);
+  float:right;
+}
+
+.emp-list-box {
+  width: calc(100% / 4.2);
+  float:left;
+  margin:0 5px 10px 5px;
+  background: #f4f7f9;
+  border: 1px solid #d3dbe3;
+  border-radius: 5px;
+  /*box-shadow: 1px 3px 2px #d3dbe3;*/
+}
+
+.emp-img-con {
+  margin:0;
+  height: 306px;
+  overflow: hidden;
+  position: relative;
+}
+
+.emp-img-con img {
+  width: 100%;
+}
+
+.emp-info-con {
+  padding:15px;
+}
+
+.act-btn{
+  width: calc(100% / 2.05);
+}
+
+.id-nmbr {
+  background:#1ABC9B;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 5px;
+  margin:10px 0;
+  font-size: 10px;
+  width: 85px;
+  text-align: center;
+  font-weight: bold;
+  color: #ffffff;
+  position: absolute;
+  top:0;
+  z-index: 1;
+  /*border-radius: 5px;*/
+}
+
+ul.emp-reqs-list {
+  list-style-type: none;
+  padding:0;
+  margin:0;
+}
+
+button.card-btn {
+  border:2px solid #6e89a7;
+  background: none;
+  transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  outline: none;
+}
+
+button.card-btn:hover {
+  background: #6e89a7;
+  color: #ffffff;
+}
+
+.img-uploader-thumb {
+    width: 100%;
+    background: 0 0;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    margin-bottom: 20px;
+    color: #4f535e;
+    text-align: center;
+}
+
+label.img-uploader-thumb input[type=file] {
+    position: fixed;
+    left: -2000px;
+}
+
+input.emp-search {
+  border: 2px solid #6e89a7;
+  padding: 8px 15px;
+  font-size: 12px;
+  color: #999;
+  width: 70%;
+  float:right;
+  outline: 0;
+}
+
+.global-inpt {
+  border: 2px solid #6e89a7;
+  padding: 8px 15px;
+  font-size: 12px;
+  color: #999;
+  width: 70%;
+  float:right;
+  outline: 0;
+}
+
+/*Modal Styles Here
+========================*/
+.modal-header {
+  position: fixed;
+}
+.modal-header {
+    padding: 15px;
+    background: #ffffff;
+    border:0 !important;
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  height: 650px;
+  overflow-y: auto;
+}
+
+/* Media Queries for Moble Responsive
+======================================*/
+
+@media (max-width: 1920px) and (min-width: 1367px) {
+  .emp-img-con {
+    margin:0;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .emp-img-con img {
+    width: 100%;
+  }
+
+  .act-btn{
+    width: calc(100% / 2.03);
+  }
+}
+
+@media (max-width: 1366px) {
+  .emp-img-con {
+    margin:0;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .emp-img-con img {
+    width: 105%;
+  }
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 640px) {
+
+}
+
+@media (max-width: 480px) {
+
+}

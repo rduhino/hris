@@ -1,0 +1,162 @@
+/* File Upload */
+label.img-uploader-thumb input[type="file"] {
+   position: fixed;
+   left: -2000px;
+}
+
+.tbl-user-img-holder {
+  overflow: hidden;
+}
+
+.tbl-user-img-holder img {
+  width: 2.1em;
+}
+
+.user-init-img-holder {
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    font-size: 15px;
+    border-radius: 50px;
+    background-color: #76b4ff;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.qa-action-btns-wrapper{
+  overflow: hidden;
+}
+
+/* Notification */
+
+.notification-parent {
+	position: relative;
+}
+
+.notification-box-success {
+	width: 320px;
+	position: absolute;
+	z-index: 10;
+	top: 8%;
+    right: 20px;
+    color: #7cc576;
+    /*display: none;*/
+	/*background: rgba(124, 197, 118, 0.5);*/
+	background: #333945;
+	/*border: 1px solid #7cc576;*/
+	border-left: 5px solid #7cc576;
+	border-radius: 3px;
+	padding:15px;
+
+	transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+}
+
+.notification-box-error {
+	width: 320px;
+	position: absolute;
+	z-index: 10;
+	top: 8%;
+    right: 20px;
+    color: #f26c4f;
+    display: none;
+	/*background: rgba(124, 197, 118, 0.5);*/
+	background: #333945;
+	/*border: 1px solid #f26c4f;*/
+	border-left: 5px solid #f26c4f;
+	border-radius: 3px;
+	padding:15px;
+
+	transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+}
+
+/* Fade In CSS Animation */
+
+@-webkit-keyframes fadeInOut {
+  0%, 100%   { opacity: 0; }
+  5%, 70% { opacity: 1; }
+}
+@-moz-keyframes fadeInOut {
+  0%, 100%   { opacity: 0; }
+  5%, 70% { opacity: 1; }
+}
+@-o-keyframes fadeInOut {
+  0%, 100%  { opacity: 0; }
+  5%, 70% { opacity: 1; }
+}
+@keyframes fadeInOut {
+  0%, 100%   { opacity: 0; }
+  5%, 70% { opacity: 1; }
+}
+
+.show-notification {
+	display: block;
+	position: fixed;
+	z-index: 9999;
+
+	-webkit-animation: fadeInOut 5s linear forwards; /* Safari 4+ */
+	-moz-animation:    fadeInOut 5s linear forwards; /* Fx 5+ */
+	-o-animation:      fadeInOut 5s linear forwards; /* Opera 12+ */
+	animation:         fadeInOut 5s linear forwards; /* IE 10+, Fx 29+ */
+
+}
+
+/* Jira Feedback Button Styles 
+================================= */
+.atlwdg-trigger {
+    position: fixed;
+    background: #76b4ff!important;
+    padding: 10px 15px !important;
+    border-top: none;
+    font-weight: bold;
+    color: white !important;
+    display: block;
+    white-space: nowrap;
+    text-decoration: none !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+
+/* Media Queries for Moble Responsive
+======================================*/
+
+@media (max-width: 768px) {
+	.show-notification {
+		left: -5px;
+	}
+
+	.notification-box-success, .notification-box-error {
+		width: 98%;
+		margin: 0 10px;
+	}
+}
+
+@media (max-width: 640px) {
+	.show-notification {
+		left: -5px;
+	}
+
+	.notification-box-success, .notification-box-error {
+		width: 99%;
+		top: 4.5%;
+	}
+}
+
+@media (max-width: 480px) {
+	.show-notification {
+		left: -5px;
+	}
+
+	.notification-box-success, .notification-box-error {
+		width: 100%;
+		top: 4.5%;
+	}
+}
