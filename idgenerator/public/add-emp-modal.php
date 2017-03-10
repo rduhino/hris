@@ -7,15 +7,15 @@
 		    <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-remove"></i></span></button>
 	    </div>
 
-      <form role="form" enctype="multipart/form-data" novalidate class="css-form" name="EmployeeForm">
+      <form role="form" enctype="multipart/form-data" novalidate class="css-form" name="EmployeeForm" id="EmployeeForm">
             <label class="img-uploader-thumb mg-t-20">
                 <input id="avatar"
                     type="file"
-                    accept="image/png"
+                    accept="image/jpeg"
                     image="cs.image"
                     resize-max-height="230"
                     resize-max-width="230"
-                    resize-type="image/png" fileupload/>
+                    resize-type="image/jpeg" fileupload/>
 
                 <img ng-src="{{add.employee.avatar ?  add.employee.avatar : 'assets/images/image-uploader.png'}}"/>
 

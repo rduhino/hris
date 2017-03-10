@@ -94,11 +94,16 @@
                     var ctx = canvas.getContext("2d");
                     ctx.drawImage(img, 0, 0, MAX_HEIGHT, MAX_WIDTH);
 
-                    var dataurl = canvas.toDataURL("image/png");
-                    if(attrs.id == 'avatar')
+
+                    if(attrs.id == 'avatar'){
+                      var dataurl = canvas.toDataURL("image/jpeg");
                       scope.add.employee.avatar = dataurl;
-                    else
+                    }
+                    else{
+                      var dataurl = canvas.toDataURL("image/png");
                       scope.add.employee.signature = dataurl;
+                    }
+
 
                     scope.$apply();
 
@@ -236,6 +241,7 @@
 
       $scope.ToAddUser = function(){
           $scope.add.employee = {};
+          document.getElementById("EmployeeForm").reset();
           $scope.add.employee.number = "GWO-";
       }
 

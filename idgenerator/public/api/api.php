@@ -35,7 +35,7 @@ if (isset($_GET['action'])) {
         $tempFilename = strtolower(str_replace('-', '', $params['number']));
         $uploadPath = $dir . $tempFilename . '.jpg';
 
-        if (!upload($uploadPath, $img))
+        if (!upload($uploadPath, $img, 'image/jpeg'))
           response( array("status" => "error" , "data" => "Avatar Not Valid.") );
 
           unset($params['avatar']);
@@ -43,7 +43,7 @@ if (isset($_GET['action'])) {
           $tempFilename = strtolower(str_replace('-', '', $params['number'])) . "signature";
           $uploadPath = $dir . $tempFilename . '.png';
 
-        if(!upload($uploadPath, $img) )
+        if(!upload($uploadPath, $img , 'image/png') )
           response( array("status" => "error" , "data" => "Signature Not Valid.") );
 
           unset($params['signature']);
@@ -81,9 +81,9 @@ if (isset($_GET['action'])) {
   }
 }
 
-function upload($filename, $imgsrc){
+function upload($filename, $imgsrc, $type){
   $img = $imgsrc; // Your data 'data:image/png;base64,AAAFBfj42Pj4';
-  $img = str_replace('data:image/png;base64,', '', $img);
+  $img = str_replace('data:'.$type.';base64,', '', $img);
 
   if (file_exists($filename)) {
       unlink($filename);
