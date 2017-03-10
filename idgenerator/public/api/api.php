@@ -73,12 +73,13 @@ if (isset($_GET['action'])) {
 
         unset($array[$empId]);
 
-
         if( file_put_contents($employees_file, json_encode($array)) ){
-          $tempFilename = strtolower(str_replace('-', '', $empId));
-          $uploadPath = $dir . $tempFilename . '.jpg';
+          $uploadPath = $dir .strtolower(str_replace('-', '', $empId)). ".jpg";
+          unlink($uploadPath);
 
-          unlink($uploadPath = $dir . $tempFilename . '.jpg');
+          $uploadPath = $dir . strtolower(str_replace('-', '', $empId)) . "signature.png";
+          unlink($uploadPath);
+
           response( array("status" => "success" , "data" => "Employee Deleted.") );
         }
         else

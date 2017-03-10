@@ -88,10 +88,9 @@
 					<p class="gray-text fz-12 fw-reg no-mg"> SSS No.: {{employee.sss}} </p>
 
 					<div class="separator"></div>
-
 					<div class="actions-con mg-b-10">
-						<a href="bank.php?p=front&&id={{employee.number}}" target="_blank"><button class="pd-tb-10 pd-lr-5 fz-10 fw-reg act-btn blue-bg no-brd white"> <i class="fa fa-print mg-r-5"></i>PRINT FRONT </button></a>
-						<a href="bank.php?p=back&&id={{employee.number}}" target="_blank"><button class="pd-tb-10 pd-lr-5 fz-10 fw-reg act-btn torquoise-bg no-brd white"> <i class="fa fa-print mg-r-5"></i>PRINT BACK </button></a>
+						<a href="#" ng-click="SetPdf(employee.number, 'front')" ><button class="pd-tb-10 pd-lr-5 fz-10 fw-reg act-btn blue-bg no-brd white"> <i class="fa fa-print mg-r-5"></i>PRINT FRONT </button></a>
+						<a href="#" ng-click="SetPdf(employee.number, 'back')" ><button class="pd-tb-10 pd-lr-5 fz-10 fw-reg act-btn torquoise-bg no-brd white"> <i class="fa fa-print mg-r-5"></i>PRINT BACK </button></a>
 					</div>
 
 					<div class="actions-con mg-b-10">
@@ -101,10 +100,15 @@
 					</div>
 				</div>
 			</div>
+      <iframe ng-src="{{pdfid}}" id="objAdobePrint" name="objAdobePrint" height="95%" width="100%" frameborder=0 style="display: none;"></iframe>
+      <!-- <object type="application/pdf" data="bank.php?p=front&&id={{pdfid}}" width="100%" height="500" style="height: 85vh;display: none;" id="pdfDocument">No Support</object> -->
+
+
 
       <?php include 'view-emp-info-modal.php'; ?>
       <?php include 'add-emp-modal.php'; ?>
       <?php include 'delete-emp-modal.php'; ?>
+
 		</div>
 	</div>
 </div>
