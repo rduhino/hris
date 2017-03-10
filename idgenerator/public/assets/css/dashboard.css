@@ -23,15 +23,25 @@
 }
 
 @font-face {
+    font-family: 'Montserrat-Light';
+    src: url('../fonts/Montserrat-Light.otf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/Montserrat-Regular.otf');
+}
+
+@font-face {
     font-family: 'HelveticaNeueLTStd-Lt';
     src: url('../fonts/HelveticaNeueLTStd-Lt.otf');
-} 
+}
 
 
 @font-face {
     font-family: 'HelveticaNeueLTStd-UltLt';
     src: url('../fonts/HelveticaNeueLTStd-UltLt.otf');
-} 
+}
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
@@ -223,14 +233,11 @@ ul.sidebar-mnu a:hover, .current i {
   width: calc(100% / 2.05);
 }
 
-.add-emp-form {
+.add-emp-form, .view-emp-con {
+  padding: 10px;
   height: 500px;
   overflow-y: auto;
-}
-
-.view-emp-con {
-  height: 500px;
-  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .user-img-con {
@@ -397,7 +404,7 @@ select.global-slct {
   height: 800px;
 }
 
-/* Media Queries for Moble Responsive 
+/* Media Queries for Moble Responsive
 ======================================*/
 
 @media (max-width: 1920px) and (min-width: 1367px) {
@@ -440,9 +447,3 @@ select.global-slct {
 @media (max-width: 480px) {
 
 }
-
-
-
-
-
-

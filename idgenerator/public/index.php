@@ -60,17 +60,16 @@
 <div class="main-body-con">
 	<div class="container-fluid no-pd">
 		<div class="emp-list-con">
+  		<div class="mg-t-20 col-md-6 pull-left">
+  			<h2 class="gray-text fz-20 fw-bld no-mg"> <i class="fa fa-tasks mg-r-10"></i>EMPLOYEE LIST AND INFORMATION</h2>
+  			<p class="gray-text fz-12 no-mg">  Here you can view and edit employee information.</p>
+  		</div>
 
-		<div class="mg-t-20 col-md-6 pull-left">
-			<h2 class="gray-text fz-20 fw-bld no-mg"> <i class="fa fa-tasks mg-r-10"></i>EMPLOYEE LIST AND INFORMATION</h2>
-			<p class="gray-text fz-12 no-mg">  Here you can view and edit employee information.</p>
-		</div>
-
-		<div class="mg-t-20 col-md-6 pull-right">
-			<input type="text" class="emp-search" placeholder="Quick Employee Search..." ng-model="searchExp" ng-change="SearchEmployee()">
-		</div>
-		<div class="clearfix"></div>
-		<div class="separator mg-tb-20"></div>
+  		<div class="mg-t-20 col-md-6 pull-right">
+  			<input type="text" class="emp-search" placeholder="Quick Employee Search..." ng-model="searchExp" ng-change="SearchEmployee()">
+  		</div>
+  		<div class="clearfix"></div>
+  		<div class="separator mg-tb-20"></div>
       <!-- User Box -->
 			<div class="emp-list-box" ng-repeat="employee in employees">
 				<div class="emp-img-con" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)">
@@ -103,18 +102,18 @@
 
       <?php include 'view-emp-info-modal.php'; ?>
       <?php include 'add-emp-modal.php'; ?>
-		
-	      <div id="deleteUser" class="modal fade bd-rd-none">
-	          <div class="modal-dialog modal-md ">
-	              <div class="modal-body gray-bg no-brd no-mg no-bx-sdw gray-text pd-t-20">
-	                  <i class="fa fa-trash fz-18 mg-r-10 mg-l-10" aria-hidden="true"></i>Are you sure you want to delete this user?
-	              </div>
-	              <div class="modal-footer gray-bg no-brd no-mg no-bx-sdw pd-15">
-	                  <button type="button" class="orange-bg pd-tb-10 pd-lr-30 text-center white no-brd" id="delete">Delete</button>
-	                  <button type="button" data-dismiss="modal" class="blue-bg pd-tb-10 pd-lr-30 text-center white no-brd">Cancel</button>
-	              </div>
-	          </div>
-	      </div>
+
+      <div id="deleteUser" class="modal fade bd-rd-none">
+          <div class="modal-dialog modal-md ">
+              <div class="modal-body gray-bg no-brd no-mg no-bx-sdw gray-text pd-t-20">
+                  <i class="fa fa-trash fz-18 mg-r-10 mg-l-10" aria-hidden="true"></i>Are you sure you want to delete this user?
+              </div>
+              <div class="modal-footer gray-bg no-brd no-mg no-bx-sdw pd-15">
+                  <button type="button" class="orange-bg pd-tb-10 pd-lr-30 text-center white no-brd" id="delete">Delete</button>
+                  <button type="button" data-dismiss="modal" class="blue-bg pd-tb-10 pd-lr-30 text-center white no-brd">Cancel</button>
+              </div>
+          </div>
+      </div>
 		</div>
 	</div>
 </div>

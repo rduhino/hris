@@ -8,25 +8,23 @@
       </div>
 
       <div class="clearfix"></div>
-      
-      <div class="add-emp-form">
-           <form action="upload.php" method="post" enctype="multipart/form-data">
-              <label class="img-uploader-thumb mg-t-20">
-                  <input id="inputImage2" 
-                      type="file" 
-                      accept="image/png" 
-                      image="cs.image" 
-                      resize-max-height="230"
-                      resize-max-width="230"
-                      resize-type="image/png"/>
 
-                  <img width="230" height="230" src="assets/images/image-uploader.png" />
+      <div class="add-emp-form">
+      <form role="form" enctype="multipart/form-data" novalidate class="css-form" name="EmployeeForm" id="EmployeeForm">
+            <label class="img-uploader-thumb mg-t-20">
+                <input id="avatar"
+                    type="file"
+                    accept="image/jpeg"
+                    image="cs.image"
+                    resize-max-height="230"
+                    resize-max-width="230"
+                    resize-type="image/jpeg" fileupload/>
+
+                  <img width = '230' height= '230' ng-src="{{add.employee.avatar ?  add.employee.avatar : 'assets/images/image-uploader.png'}}"/>
 
               </label>
               <div class="clearfix"></div>
-          </form>
 
-          <form action="upload.php" method="post" enctype="multipart/form-data">
               <label class="img-uploader-thumb">
                   <input id="signature"
                       type="file"
@@ -40,9 +38,7 @@
 
               </label>
               <div class="clearfix"></div>
-          </form>
 
-          <div class="clearfix"></div>
 
 
         <h2 class="pull-left gray-text fw-bld fz-14"> <i class="fa fa-book mg-r-10"></i>EMPLOYEE INFORMATION</h2>
@@ -57,15 +53,15 @@
           	<div class="col-md-6">
           		<p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Job Title </p>
           		<select class="global-slct w100" type="submit" name="title" placeholder="Job Title" ng-model="add.employee.title" required/>
-                    <option value=""> Human Resource </option>
-                    <option value=""> Web Developer </option>
-                    <option value=""> Web Designer </option>
-                    <option value=""> Technical Admin </option>
-                    <option value=""> Team Leader </option>
-                    <option value=""> Quality Assurance </option>
-                    <option value=""> Quality Control </option>
-                    <option value=""> Sales Executive </option>
-                    <option value=""> Admin Staff </option>
+                    <option value="Human Resource"> Human Resource </option>
+                    <option value="Web Developer"> Web Developer </option>
+                    <option value="Web Designer"> Web Designer </option>
+                    <option value="Technical Admin"> Technical Admin </option>
+                    <option value="Team Leader"> Team Leader </option>
+                    <option value="Quality Assurance"> Quality Assurance </option>
+                    <option value="Quality Control"> Quality Control </option>
+                    <option value="Sales Executive"> Sales Executive </option>
+                    <option value="Admin Staff"> Admin Staff </option>
                 </select>
           	</div>
 
