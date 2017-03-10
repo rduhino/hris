@@ -203,7 +203,7 @@
           };
 
           $scope.DeleteEmployee = function(id){
-            $('#deleteUser').modal({ backdrop: 'static', keyboard: false })
+            $('#deleteEmployee').modal({ backdrop: 'static', keyboard: false })
             .on('click', '#delete', function() {
                 var vm = this;
                 Services.deleteEmployee(id).then(function(response){
@@ -322,7 +322,7 @@
   //
   EmpController.$inject = ['$scope', 'Services'];
 
-  // $('#deleteUser').modal({ backdrop: 'static', keyboard: false })
+  // $('#deleteEmployee').modal({ backdrop: 'static', keyboard: false })
 })();
 
 

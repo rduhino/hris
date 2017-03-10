@@ -36,14 +36,15 @@ label.img-uploader-thumb input[type="file"] {
 }
 
 .notification-box-success {
-	width: 320px;
+	border: 1px solid #d3dbe3;
+	width: 350px;
 	position: absolute;
 	z-index: 10;
-	top: 8%;
+	top: 6%;
     right: 20px;
     color: #7cc576;
 	background: #ffffff;
-	border-right: 15px solid #7cc576;
+	border-left: 15px solid #7cc576;
 	padding:15px;
 	transition: all .2s ease-in-out;
 	-webkit-transition: all .2s ease-in-out;
@@ -58,17 +59,18 @@ label.img-uploader-thumb input[type="file"] {
 }
 
 .notification-box-error {
-	width: 320px;
+	border: 1px solid #d3dbe3;
+	width: 350px;
 	position: absolute;
 	z-index: 10;
-	top: 8%;
+	top: 6%;
     right: 20px;
     color: #f26c4f;
     display: none;
 	transition: all .2s ease-in-out;
 	-webkit-transition: all .2s ease-in-out;
 	-moz-transition: all .2s ease-in-out;
-	border-right: 15px solid #f26c4f;
+	border-left: 15px solid #f26c4f;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 	background: #ffffff;
