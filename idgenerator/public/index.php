@@ -22,11 +22,19 @@
 <notification alert-data="notifConfig"></notification>
 <div class="nav-hdr">
 	<div class="col-md-6">
-		<img src="images/vops-white-logo.png" alt="">
+		<img src="assets/images/vops-white-logo.png" alt="">
 	</div>
 
 	<div class="col-md-6">
 
+		<a href=""><button class="blue-bg opac-80 white pd-tb-5 pd-lr-20 fz-12 no-brd pull-right fw-reg bd-rd-50"> LOGOUT </button></a>
+
+		<div class="pull-right mg-r-20">
+			<div class="user-img-con pull-right">
+				<img src="assets/images/anne.jpg" alt="">
+			</div>
+			<p class="pull-right white fw-light fz-12 mg-r-10 lh-25 mg-tb-0"> Admin </p>
+		</div>
 	</div>
 </div>
 
@@ -52,22 +60,22 @@
 <div class="main-body-con">
 	<div class="container-fluid no-pd">
 		<div class="emp-list-con">
+  		<div class="mg-t-20 col-md-6 pull-left">
+  			<h2 class="gray-text fz-20 fw-bld no-mg"> <i class="fa fa-tasks mg-r-10"></i>EMPLOYEE LIST AND INFORMATION</h2>
+  			<p class="gray-text fz-12 no-mg">  Here you can view and edit employee information.</p>
+  		</div>
 
-		<div class="mg-t-20 col-md-6 pull-left">
-			<h2 class="gray-text fz-20 fw-bld no-mg"> <i class="fa fa-tasks mg-r-10"></i>EMPLOYEE LIST AND INFORMATION</h2>
-			<p class="gray-text fz-12 no-mg">  Here you can view and edit employee information.</p>
-		</div>
-
-		<div class="mg-t-20 col-md-6 pull-right">
-			<input type="text" class="emp-search" placeholder="Quick Employee Search..." ng-model="searchExp" ng-change="SearchEmployee()">
-		</div>
-		<div class="clearfix"></div>
-		<div class="separator mg-tb-20"></div>
+  		<div class="mg-t-20 col-md-6 pull-right">
+  			<input type="text" class="emp-search" placeholder="Quick Employee Search..." ng-model="searchExp" ng-change="SearchEmployee()">
+  		</div>
+  		<div class="clearfix"></div>
+  		<div class="separator mg-tb-20"></div>
       <!-- User Box -->
 			<div class="emp-list-box" ng-repeat = "employee in employees">
 				<div class="emp-img-con">
 					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg" alt="" employee-avatar>
 					<div class="id-nmbr"> {{employee.number}} </div>
+					<div class="del-emp" ng-click="DeleteEmployee(employee.number)" > <i class="fa fa-trash white fz-18"></i> </div>
 				</div>
 
 				<div class="emp-info-con">
@@ -88,9 +96,6 @@
 
 					<div class="actions-con mg-b-10">
 						<button class="pd-10 fz-10 fw-reg w100 card-btn gray-text white" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> VIEW FULL INFORMATION </button>
-					</div>
-          <div class="actions-con">
-						<button class="pd-10 fz-10 fw-reg w100 card-btn gray-text white" ng-click="DeleteEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> DELETE USER </button>
 					</div>
 				</div>
 			</div>

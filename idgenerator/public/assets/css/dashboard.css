@@ -13,8 +13,13 @@
 }
 
 @font-face {
-    font-family: 'Montserrat-Regular';
+    font-family: 'Montferrat-Regular';
     src: url('../fonts/Montserrat-Regular.otf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Hairline';
+    src: url('../fonts/Montserrat-Hairline.otf');
 }
 
 @font-face {
@@ -23,8 +28,8 @@
 }
 
 @font-face {
-    font-family: 'Montserrat-Hairline';
-    src: url('../fonts/Montserrat-Hairline.otf');
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/Montserrat-Regular.otf');
 }
 
 @font-face {
@@ -176,7 +181,7 @@ ul.sidebar-mnu a:hover, .current i {
 
 .nav-hdr {
   background: #4c94e5;
-  border-bottom: 5px solid #2d71be;
+  /*border-bottom: 5px solid #2d71be;*/
   padding: 10px 0;
   position: fixed;
   top:0;
@@ -185,7 +190,7 @@ ul.sidebar-mnu a:hover, .current i {
 }
 
 .nav-hdr img {
-  width: 15%;
+  width: 18%;
 }
 
 .emp-list-con {
@@ -214,6 +219,10 @@ ul.sidebar-mnu a:hover, .current i {
 
 .emp-img-con img {
   width: 100%;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
 }
 
 .emp-info-con {
@@ -222,6 +231,25 @@ ul.sidebar-mnu a:hover, .current i {
 
 .act-btn{
   width: calc(100% / 2.05);
+}
+
+.add-emp-form, .view-emp-con {
+  padding: 10px;
+  height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.user-img-con {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user-img-con img {
+  width: 100%;
 }
 
 .id-nmbr {
@@ -238,6 +266,23 @@ ul.sidebar-mnu a:hover, .current i {
   position: absolute;
   top:0;
   z-index: 1;
+  /*border-radius: 5px;*/
+}
+
+.del-emp {
+  background: #f26c4f;
+  border-radius: 5px;
+  padding: 5px 7px;
+  margin:10px 0;
+  font-size: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #ffffff;
+  position: absolute;
+  top:0;
+  right:10px;
+  z-index: 1;
+  cursor: pointer;
   /*border-radius: 5px;*/
 }
 
@@ -265,12 +310,12 @@ button.card-btn:hover {
     width: 100%;
     background: 0 0;
     cursor: pointer;
-    transition: all .3s ease-in-out;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    margin-bottom: 20px;
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
     color: #4f535e;
     text-align: center;
+    cursor: pointer;
 }
 
 label.img-uploader-thumb input[type=file] {
@@ -278,24 +323,54 @@ label.img-uploader-thumb input[type=file] {
     left: -2000px;
 }
 
+.img-uploader-thumb:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+}
+
 input.emp-search {
   border: 2px solid #6e89a7;
+  background: url('../images/search-icon.png') no-repeat right;
+  background-size: 15px;
+  background-position: 97% 50%;
   padding: 8px 15px;
   font-size: 12px;
   color: #999;
-  width: 70%;
+  width: 40%;
   float:right;
   outline: 0;
+  transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+}
+
+input.emp-search:focus {
+  width: 60%;
 }
 
 .global-inpt {
   border: 2px solid #6e89a7;
   padding: 8px 15px;
+  height: 40px;
+  background: none;
+  border-radius: 0 !important;
   font-size: 12px;
   color: #999;
-  width: 70%;
-  float:right;
   outline: 0;
+}
+
+select.global-slct {
+  border: 2px solid #6e89a7;
+  padding: 8px 15px;
+  height: 40px;
+  background: none;
+  border-radius: 0 !important;
+  font-size: 12px;
+  color: #999;
+  outline: 0;
+  -webkit-appearance: none;
+    -webkit-border-radius: 0px;
 }
 
 /*Modal Styles Here
@@ -326,8 +401,7 @@ input.emp-search {
   display: inline-block;
   text-align: left;
   vertical-align: middle;
-  height: 650px;
-  overflow-y: auto;
+  height: 800px;
 }
 
 /* Media Queries for Moble Responsive
@@ -359,6 +433,7 @@ input.emp-search {
   .emp-img-con img {
     width: 105%;
   }
+
 }
 
 @media (max-width: 768px) {
