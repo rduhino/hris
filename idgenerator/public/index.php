@@ -102,7 +102,7 @@
       <?php include 'add-emp-modal.php'; ?>
 
       <div id="deleteUser" class="modal fade bd-rd-none">
-          <div class="modal-dialog modal-md ">
+          <div class="modal-dialog modal-md">
               <div class="modal-body gray-bg no-brd no-mg no-bx-sdw gray-text pd-t-20">
                   <i class="fa fa-trash fz-18 mg-r-10 mg-l-10" aria-hidden="true"></i>Are you sure you want to delete this user?
               </div>
@@ -121,13 +121,11 @@
     <script src="assets/js/angular-route.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/app.js"></script>
-
     <script>
     	$(document).ready(function(){
-    		$('[data-toggle="tooltip"]').tooltip();
-    	});
+		    $('[data-toggle="tooltip"]').tooltip();
+		});
     </script>
-	
     <script>
         new WOW().init();
     </script>

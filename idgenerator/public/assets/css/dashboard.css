@@ -402,6 +402,7 @@ select.global-slct {
   text-align: left;
   vertical-align: middle;
   height: 800px;
+  z-index: 99999;
 }
 
 /* Media Queries for Moble Responsive
