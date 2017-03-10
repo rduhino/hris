@@ -72,8 +72,15 @@ if (isset($_GET['action'])) {
           response( array("status" => "error" , "data" => "Employee not found.") );
 
         unset($array[$empId]);
-        if( file_put_contents($employees_file, json_encode($array)) )
+
+
+        if( file_put_contents($employees_file, json_encode($array)) ){
+          $tempFilename = strtolower(str_replace('-', '', $empId));
+          $uploadPath = $dir . $tempFilename . '.jpg';
+
+          unlink($uploadPath = $dir . $tempFilename . '.jpg');
           response( array("status" => "success" , "data" => "Employee Deleted.") );
+        }
         else
           response( array("status" => "error" , "data" => "Employee Error Deletion.") );
 
