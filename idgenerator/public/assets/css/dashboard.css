@@ -235,7 +235,7 @@ ul.sidebar-mnu a:hover, .current i {
 
 .add-emp-form, .view-emp-con {
   padding: 10px;
-  height: 500px;
+  height: 600px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -258,7 +258,7 @@ ul.sidebar-mnu a:hover, .current i {
   border-bottom-right-radius: 5px;
   padding: 5px;
   margin:10px 0;
-  font-size: 10px;
+  font-size: 12px;
   width: 85px;
   text-align: center;
   font-weight: bold;
