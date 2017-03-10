@@ -73,7 +73,6 @@ if (isset($_GET['action'])) {
 
         unset($array[$empId]);
 
-
         if( file_put_contents($employees_file, json_encode($array)) ){
           $uploadPath = $dir .strtolower(str_replace('-', '', $empId)). ".jpg";
           unlink($uploadPath);

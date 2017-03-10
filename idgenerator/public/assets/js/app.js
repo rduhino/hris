@@ -156,7 +156,7 @@
 
 
   /************* CONTROLLER *************/
-  var EmpController = function($scope, Services){
+  var EmpController = function($scope, $sce, $timeout, Services){
       var uc = this;
 
       $scope.employees = {};
@@ -166,6 +166,7 @@
       $scope.add = {};
 
       $scope.searchExp = "";
+      $scope.pdfid = '';
 
       $scope.notifConfig = {show: false, message: null, head: "Success", type: 'success',
                             set : function(options){
@@ -236,6 +237,12 @@
             });
           };
 
+          $scope.SetPdf = function(id, position){
+            $scope.pdfid = 'bank.php?p=' + position + '&&id='+ id;
+            $timeout(function (){
+                  window.frames['objAdobePrint'].print();
+            }, 1000);
+          }
 
       });
 
@@ -320,7 +327,7 @@
                    .directive('fileupload', fileupload)
                    .directive('notification', ['$timeout', dirNotification])
   //
-  EmpController.$inject = ['$scope', 'Services'];
+  EmpController.$inject = ['$scope', '$sce', '$timeout', 'Services'];
 
   // $('#deleteEmployee').modal({ backdrop: 'static', keyboard: false })
 })();
