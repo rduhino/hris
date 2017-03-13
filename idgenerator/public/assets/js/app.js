@@ -204,8 +204,8 @@
 
       Services.getEmployee().then(function(response) {
           if(response.data.status == "success"){
-            //$scope.tmpemployees = response.data.data;
-            $scope.employees = response.data.data;
+            $scope.tmpemployees = response.data.data;
+            // $scope.employees = response.data.data;
 
             uc.setEmployees();
 
@@ -287,7 +287,7 @@
 
               Services.updateEmployee( $scope.update.employee).then(function(response){
                   if(response.data.status == "success"){
-                    uc.setEmployees();
+                    uc.initEmployees();
                     $scope.ToggleEdit(element);
                   }
 
@@ -310,7 +310,7 @@
                 var vm = this;
                 Services.updateEmployeeStatus( $scope.update.employee).then(function(response){
                   if(response.data.status == "success"){
-                    uc.setEmployees();
+                    uc.initEmployees();
                     $(vm).closest(".modal").modal('hide');
                   }
 
@@ -320,6 +320,12 @@
                   });
 
                 });
+            })
+            .one('click','#noupdate', function(){
+              var vm = this;
+              $scope.employees[id] = angular.copy($scope.origemployees[id]);
+              $scope.$apply();
+              $(vm).closest(".modal").modal('hide');
             });
           };
 
@@ -384,7 +390,7 @@
               Services.addEmployee($scope.add.employee).then(function(response) {
                 if(response.data.status == "success"){
                   $scope.employees[$scope.add.employee.number] = $scope.add.employee;
-                  uc.setEmployees();
+                  uc.initEmployees();
                   $('#showAddEmpModal').modal('hide');
                 }
 
@@ -410,22 +416,25 @@
 
       }
 
+      uc.initEmployees = function(){
+        $scope.origemployees = angular.copy($scope.employees);
+      }
       uc.setEmployees = function(){
         var tmpObj = {};
-        Object.keys($scope.employees).sort().forEach( function(key){
-          tmpObj[key] = $scope.employees[key];
+        // Object.keys($scope.employees).sort().forEach( function(key){
+        //   tmpObj[key] = $scope.employees[key];
+        //
+        // });
 
-        });
-
-        $scope.employees = tmpObj;
-        $scope.origemployees = angular.copy($scope.employees);
+        // $scope.employees = tmpObj;
+        // $scope.origemployees = angular.copy($scope.employees);
         //Animate List
-        //Object.keys($scope.tmpemployees).sort().forEach( function(key, index){
-            //$timeout(function (){
-                //$scope.employees[key] = $scope.tmpemployees[key];
-                //$scope.origemployees = $scope.employees;
-            //}, 150 * index);
-        //});
+        Object.keys($scope.tmpemployees).sort().forEach( function(key, index){
+            $timeout(function (){
+                $scope.employees[key] = $scope.tmpemployees[key];
+                $scope.origemployees = angular.copy($scope.employees);
+            }, 50 * index);
+        });
 
       }
 

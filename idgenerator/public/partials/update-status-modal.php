@@ -9,8 +9,8 @@
       <div class="modal-footer gray-bg no-brd no-mg no-bx-sdw pd-15">
           <div class="col-md-12 mg-t-20">
             <button type="button" class="orange-bg pd-tb-10 pd-lr-30 text-center white no-brd" id="update">Update</button>
-            <button type="button" data-dismiss="modal" class="blue-bg pd-tb-10 pd-lr-30 text-center white no-brd">Cancel</button>
-          </div>  
+            <button type="button" class="blue-bg pd-tb-10 pd-lr-30 text-center white no-brd" id="noupdate">Cancel</button>
+          </div>
       </div>
   </div>
 </div>
