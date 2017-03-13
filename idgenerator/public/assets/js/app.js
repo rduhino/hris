@@ -1,13 +1,13 @@
 (function () {
-    
+
     'use strict';
-    
+
     /************* SERVICE *************/
     var Service = function ($http) {
-        
+
       var serviceBase = 'api/api.php',
           obj = {};
-        
+
       obj.getEmployee = function () {
           return $http.get (serviceBase + "?action=employees");
       }
@@ -23,7 +23,7 @@
             return results;
         });
       }
-      
+
       obj.updateEmployee = function(employee) {
         return $http.post (serviceBase + "?action=updateEmployee", employee).then(function(results) {
             return results;
@@ -75,7 +75,7 @@
 
                     var canvas = document.createElement("canvas"),
                         ctx = canvas.getContext("2d");
-                      
+
                     ctx.drawImage(img, 0, 0);
 
                     var MAX_WIDTH = 230,
@@ -165,12 +165,12 @@
   var EmpController = function($scope, $sce, $timeout, Services){
       var uc = this;
       var backUpEmployee = {};
-      
+
       $scope.employees = {};
       $scope.origemployees = {};
-      
+
       $scope.sort = 'name';
-      
+
       $scope.view = {};
       $scope.add = {};
       $scope.update = {};
@@ -179,7 +179,7 @@
       $scope.pdfid = '';
       $scope.onEdit = false;
       $scope.noView = false;
-      
+
       $scope.empStatus = ["Active","Resigned","Terminated"];
 
       $scope.notifConfig = {show: false, message: null, head: "Success", type: 'success',
@@ -204,24 +204,45 @@
 
       Services.getEmployee().then(function(response) {
           if(response.data.status == "success"){
-            //$scope.tmpemployees = response.data.data; 
+            //$scope.tmpemployees = response.data.data;
             $scope.employees = response.data.data;
 
             uc.setEmployees();
-              
+
             $scope.$watch('sort', function(value){
                 //TODO: SORT FUNCTION
+                var tmp = [];
+                var tmpObj = {};
+                $.each($scope.origemployees, function(k, obj){
+                  tmp.push(obj);
+                });
+                tmp.sort(function(a, b) {
+                  if(!a[value])
+                    return -1;
+
+                  if(!a[value])
+                    return 1;
+
+                  return a[value].localeCompare(b[value]);
+                });
+
+                $.each(tmp, function(k, obj){
+                  tmpObj[obj.number] = obj
+                });
+
+                $scope.employees = angular.copy(tmpObj);
+                $scope.origemployees = angular.copy($scope.employees )
             });
           }
-          
+
           /** VIEW TO EDIT **/
           $scope.ViewEmployee = function(id){
               $scope.view.employee = $scope.employees[id];
           };
-          
+
           $scope.ToggleEdit = function (element){
               backUpEmployee = angular.copy($scope.view.employee);
-              
+
               if(typeof element == "undefined"){
                 for(var ctr = 1 ; ctr <= 2 ; ctr++){
                     $scope.ToggleEdit(ctr);
@@ -230,15 +251,15 @@
                 $('.form-edit-' + element).toggle();
                 $('.form-info-' + element).toggle();
                 $('#EditEmployeeForm').toggleClass('editing-' + element);
-              } 
-              
+              }
+
               $scope.onEdit = uc.CheckIfEditing();
-              
+
               return true;
           }
-          
+
           $scope.CloseEdit = function (element){
-             
+
              if(typeof element == 'undefined'){
                  $('#cancelEdit').modal ({ backdrop: 'static', keyboard: false })
                  .one('click', '#yesCancel', function () {
@@ -259,11 +280,11 @@
              }
 
           }
-           
+
           $scope.UpdateEmployee = function(element){
               $scope.update.employee = {};
               $scope.update.employee = $scope.view.employee;
-              
+
               Services.updateEmployee( $scope.update.employee).then(function(response){
                   if(response.data.status == "success"){
                     uc.setEmployees();
@@ -277,20 +298,20 @@
 
               });
           }
-          
-          
+
+
           /** UPDATE STATUS **/
           $scope.UpdateEmpStatus = function(id){
             $scope.update.employee = {};
             $scope.update.employee = $scope.employees[id];
-              
+
             $('#updateEmployeeStatus').modal ({ backdrop: 'static', keyboard: false })
             .one('click', '#update', function () {
                 var vm = this;
                 Services.updateEmployeeStatus( $scope.update.employee).then(function(response){
                   if(response.data.status == "success"){
                     uc.setEmployees();
-                    $(vm).closest(".modal").modal('toggle');
+                    $(vm).closest(".modal").modal('hide');
                   }
 
                   $scope.notifConfig.set({
@@ -301,8 +322,8 @@
                 });
             });
           };
-          
-          
+
+
           /** SEARCH EMPLOYEE **/
           $scope.SearchEmployee = function (){
             var search = $scope.searchExp.toLowerCase();
@@ -316,7 +337,7 @@
               }
             });
           };
-          
+
           $scope.SetPdf = function(id, position){
             $scope.pdfid = 'api/bank.php?p=' + position + '&&id='+ id;
             $timeout(function (){
@@ -337,7 +358,7 @@
       $scope.AddUser = function(){
           var msg = "";
           var skip = false;
-          
+
           if(typeof $scope.employees[$scope.add.employee.number] != 'undefined' ){
             msg = "Employee already exist!";
             skip = true;
@@ -364,7 +385,7 @@
                 if(response.data.status == "success"){
                   $scope.employees[$scope.add.employee.number] = $scope.add.employee;
                   uc.setEmployees();
-                  $('#showAddEmpModal').modal('toggle');
+                  $('#showAddEmpModal').modal('hide');
                 }
 
                 $scope.notifConfig.set({
@@ -393,23 +414,23 @@
         var tmpObj = {};
         Object.keys($scope.employees).sort().forEach( function(key){
           tmpObj[key] = $scope.employees[key];
-            
+
         });
-        
+
         $scope.employees = tmpObj;
-        $scope.origemployees = angular.copy($scope.employees);  
+        $scope.origemployees = angular.copy($scope.employees);
         //Animate List
         //Object.keys($scope.tmpemployees).sort().forEach( function(key, index){
             //$timeout(function (){
-                //$scope.employees[key] = $scope.tmpemployees[key];    
+                //$scope.employees[key] = $scope.tmpemployees[key];
                 //$scope.origemployees = $scope.employees;
             //}, 150 * index);
         //});
-          
-      }
-      
 
-      uc.CheckIfEditing = function (){        
+      }
+
+
+      uc.CheckIfEditing = function (){
           for(var ctr = 1 ; ctr <= 2 ; ctr++){
             if($('#EditEmployeeForm').hasClass('editing-' + ctr))
                 return true;
@@ -417,7 +438,7 @@
 
           return false;
       }
-      
+
       $('#cancelEdit').on("hidden.bs.modal", function(e){
           if(!$scope.noView)
             $('#showViewEmpModal').modal('show');
@@ -426,21 +447,21 @@
                     $('.form-edit-' + ctr).hide();
                     $('.form-info-' + ctr).show();
                     $('#EditEmployeeForm').removeClass('editing-' + ctr);
-            }  
+            }
               $scope.onEdit = false;
           }
           $scope.noView = false;
       });
-      
+
       $('#cancelEdit').on("show.bs.modal", function(e){
           $('#showViewEmpModal').modal('hide');
       });
-      
+
       $('#updateEmployeeStatus').on("shown.bs.modal", function(e){
           $("#EmpStats").val($scope.update.employee.status);
       });
   }
-  
+
   var app = angular.module ('hris', ['ngRoute', 'ngAnimate'])
                    .service ('Services', ['$http', Service])
                    .filter ('ConvertIdToImage', ConvertIdToImage)
@@ -448,7 +469,7 @@
                    .directive ('employeeAvatar', employeeAvatar)
                    .directive ('fileupload', fileupload)
                    .directive ('notification', ['$timeout', dirNotification]);
-    
+
   EmpController.$inject = ['$scope', '$sce', '$timeout', 'Services'];
 
 })();
