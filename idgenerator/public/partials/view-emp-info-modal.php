@@ -15,9 +15,9 @@
 
 	<div class="view-emp-con">
         <form role="form" enctype="multipart/form-data" novalidate class="css-form" name="EmployeeForm" id="EditEmployeeForm">
-            <i class="fa fa-pencil mg-r-5 gray-text white pull-right form-info-1" ng-click="ToggleEdit(1)"></i>
-            <i class="fa fa-check mg-r-5 green  pull-right form-edit-1" ng-click="UpdateEmployee(1)"></i>
-            <i class="fa fa-close mg-r-5 red pull-right form-edit-1" ng-click="CloseEdit(1)"></i>
+            <i class="fa fa-pencil mg-r-5 gray-bg white pull-right form-info-1 fz-14 update-emp-status-btn" ng-click="ToggleEdit(1)"></i>
+            <i class="fa fa-close pull-right form-edit-1 update-emp-status-btn orange-bg" ng-click="CloseEdit(1)"></i>
+            <i class="fa fa-check pull-right form-edit-1 update-emp-status-btn green-bg" ng-click="UpdateEmployee(1)"></i>
             
 	        <label class="img-uploader-thumb mg-t-20 form-edit-1">
 	            <input id="inputImage2"
@@ -59,6 +59,7 @@
                         <option value="Human Resource"> Human Resource </option>
                         <option value="Web Developer"> Web Developer </option>
                         <option value="Web Designer"> Web Designer </option>
+                        <option value="Customer Service Rep"> Customer Service Rep </option>
                         <option value="Technical Admin"> Technical Admin </option>
                         <option value="Team Leader"> Team Leader </option>
                         <option value="Quality Assurance"> Quality Assurance </option>
@@ -76,9 +77,9 @@
 
 				<div class="separator"></div>
                 <div class="col-md-12 no-pd">
-                    <i class="fa fa-pencil mg-r-5 gray-text white pull-right form-info-2" ng-click="ToggleEdit(2)"></i>
-                    <i class="fa fa-check mg-r-5 green  pull-right form-edit-2" ng-click="UpdateEmployee(2)"></i>
-                    <i class="fa fa-close mg-r-5 red pull-right form-edit-2" ng-click="CloseEdit(2)"></i>
+                    <a href=""><i class="fa fa-pencil mg-r-5 gray-bg white pull-right form-info-2 fz-14 update-emp-status-btn" ng-click="ToggleEdit(2)"></i></a>
+                    <a href=""><i class="fa fa-close pull-right form-edit-2 update-emp-status-btn orange-bg" ng-click="CloseEdit(2)"></i></a>
+                    <a href=""><i class="fa fa-check pull-right form-edit-2 update-emp-status-btn green-bg" ng-click="UpdateEmployee(2)"></i></a>
                 </div>
 			    <div class="col-md-6 mg-t-20 pd-r-5">
 
@@ -148,45 +149,52 @@
 
 			<div class="mg-t-20">
 
-			<ul class="emp-reqs-list">
-				<li>
-					<p>
-						<input type="checkbox" id="1" />
-			 			<label for="1"></label>	<span class="gray-text fz-12 fw-reg">Medical Records <i class="fa fa-eye mg-l-10"></i></span>
-					</p>
-				</li>
+				<ul class="emp-reqs-list">
+					<li>
+						<p>
+							<input type="checkbox" id="1" />
+				 			<label for="1"></label>	<span class="gray-text fz-12 fw-reg">Medical Records <i class="fa fa-eye mg-l-10"></i></span>
+						</p>
+					</li>
 
-				<li>
-					<p>
-						<input type="checkbox" id="2" />
-			 			<label for="2"></label>	<span class="gray-text fz-12 fw-reg">PAG-IBIG</span>
-					</p>
-				</li>
+					<li>
+						<p>
+							<input type="checkbox" id="2" />
+				 			<label for="2"></label>	<span class="gray-text fz-12 fw-reg">PAG-IBIG</span>
+						</p>
+					</li>
 
-				<li>
-					<p>
-						<input type="checkbox" id="3" />
-			 			<label for="3"></label>	<span class="gray-text fz-12 fw-reg">Social Security System (SSS)</span>
-					</p>
-				</li>
+					<li>
+						<p>
+							<input type="checkbox" id="3" />
+				 			<label for="3"></label>	<span class="gray-text fz-12 fw-reg">Social Security System (SSS)</span>
+						</p>
+					</li>
 
-				<li>
-					<p>
-						<input type="checkbox" id="4" />
-			 			<label for="4"></label>	<span class="gray-text fz-12 fw-reg">BIR (2316)</span>
-					</p>
-				</li>
+					<li>
+						<p>
+							<input type="checkbox" id="4" />
+				 			<label for="4"></label>	<span class="gray-text fz-12 fw-reg">BIR (2316)</span>
+						</p>
+					</li>
 
-				<li>
-					<p>
-						<input type="checkbox" id="5" />
-			 			<label for="5"></label>	<span class="gray-text fz-12 fw-reg">Certificate of Employment</span>
-					</p>
-				</li>
-			</ul>
+					<li>
+						<p>
+							<input type="checkbox" id="5" />
+				 			<label for="5"></label>	<span class="gray-text fz-12 fw-reg">Certificate of Employment</span>
+						</p>
+					</li>
+				</ul>
 			</div>
 
 	    </div>
+
+	    <!-- Action Buttons Here -->
+        <div class="col-md-12 no-pd">
+            <button class="pull-right white mg-t-20 fz-12 bd-rd-none orange-bg no-brd pd-lr-30 pd-tb-10 fw-bld" type="submit" name="submit" data-dismiss="modal" aria-label="Close"> <i class="fa fa-remove mg-r-5"></i>CANCEL</button>
+            <button class="pull-right white mg-t-20 fz-12 bd-rd-none green-bg no-brd pd-lr-30 pd-tb-10 fw-bld mg-r-10" data-dismiss="modal" type="submit" name="submit"> <i class="fa fa-check mg-r-5"></i>UPDATE</button>
+        </div>
+        <div class="clearfix"></div>
 	  </div>
   </div>
 </div>

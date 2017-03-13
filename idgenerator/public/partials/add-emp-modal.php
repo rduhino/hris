@@ -56,6 +56,7 @@
                         <option value="Human Resource"> Human Resource </option>
                         <option value="Web Developer"> Web Developer </option>
                         <option value="Web Designer"> Web Designer </option>
+                        <option value="Customer Service Rep"> Customer Service Rep </option>
                         <option value="Technical Admin"> Technical Admin </option>
                         <option value="Team Leader"> Team Leader </option>
                         <option value="Quality Assurance"> Quality Assurance </option>
