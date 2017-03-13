@@ -91,12 +91,12 @@
               	</div>
 
               	<div class="col-md-6">
-              		<p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Emergency Person's Contact Number </p>
-              		<input class="global-inpt w100" type="text" name="emergency_name" placeholder="Emergency Person's Contact Number" ng-model="add.employee.emergency_name" required/>
+              		<p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Emergency Person's Name </p>
+              		<input class="global-inpt w100" type="text" name="emergency_name" placeholder="Emergency Person's Name" ng-model="add.employee.emergency_name" required/>
               	</div>
               	<div class="col-md-6">
-              		<p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Emergency Person's Name </p>
-              		<input class="global-inpt w100" type="text" name="emergency_number" placeholder="Emergency Person's Name" ng-model="add.employee.emergency_number" required/>
+              		<p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Emergency Person's Contact Number </p>
+              		<input class="global-inpt w100" type="text" name="emergency_number" placeholder="Emergency Person's Contact Number" ng-model="add.employee.emergency_number" required/>
               	</div>
 
               	<div class="clearfix"></div>

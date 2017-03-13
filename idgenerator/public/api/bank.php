@@ -1,8 +1,8 @@
 <?php
-require_once 'fpdf/pdf.php';
+require_once '../fpdf/pdf.php';
 
-$employees_file = 'db/employees.txt';
-$dir = "images/";
+$employees_file = '../db/employees.txt';
+$dir = "../images/";
 $toPrint = "";
 
 $json = file_get_contents($employees_file);
@@ -41,7 +41,7 @@ foreach ($array as $key => $row) {
 
 	switch ($toPrint) {
 	case 'front':
-		$pdf->Image('upload/front.jpg', 0, 0, 58, 90);
+		$pdf->Image('../upload/front.jpg', 0, 0, 58, 90);
 
 		append($pdf, array('name' => 'position', 'data' => $title));
 		append($pdf, array('name' => 'picture', 'data' => $picture));
@@ -49,7 +49,7 @@ foreach ($array as $key => $row) {
 		append($pdf, array('name' => 'id_barCode', 'data' => $number));
 		break;
 	case 'back':
-		$pdf->Image('upload/back.jpg', 0, 0, 58, 90);
+		$pdf->Image('../upload/back.jpg', 0, 0, 58, 90);
 
 		append($pdf, array('name' => 'details',
 			'data' => array('fullName' => $name,

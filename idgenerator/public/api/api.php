@@ -2,6 +2,8 @@
 
 $employees_file = '../db/employees.txt';
 $dir = "../images/";
+$func = 'insert';
+
 $number = '';
 $alias = '';
 $name = '';
@@ -12,6 +14,7 @@ $tin = '';
 $sss = '';
 $emergency_name = '';
 $emergency_number = '';
+
 
 if (isset($_GET['action'])) {
   switch($_GET['action']){
@@ -29,34 +32,62 @@ if (isset($_GET['action'])) {
         }
 
       break;
+    case 'updateEmployeeStatus' : $func = 'status';
+    case 'updateEmployee' : $func = $func == 'insert' ? 'update' : $func;
     case 'addEmployee':
-        $params = json_decode(file_get_contents('php://input'),true);
-        $img = isset($params['avatar']) ? $params['avatar'] : null;
-        $tempFilename = strtolower(str_replace('-', '', $params['number']));
-        $uploadPath = $dir . $tempFilename . '.jpg';
+          $img = false;
+          
+          $response = array(
+                        'insert' => array(
+                                'error'   => 'Employee Error Creation.',
+                                'success' => 'Employee Created.'
+                                ),
+                        'update' => array(
+                                'error'   => 'Employee Error Update.',
+                                'success' => 'Employee Updated.'
+                                ),
+                        'status' => array(
+                                'error'   => 'Employee Error Update Status.',
+                                'success' => 'Employee Status Updated.'
+                                ),
+                    );
+          $params = json_decode(file_get_contents('php://input'),true);
+          
+          if($func == 'insert' || $func =='update'){
+              
+            $img = isset($params['avatar']) ? $params['avatar'] : false;
+            $tempFilename = strtolower(str_replace('-', '', $params['number']));
+            $uploadPath = $dir . $tempFilename . '.jpg';
+            
+            if(($img && $func == 'update') || $func == 'insert'){
+              if (!$img || !upload($uploadPath, $img, 'image/jpeg'))
+                response( array("status" => "error" , "data" => "Avatar Not Valid.") );
 
-        if (!upload($uploadPath, $img, 'image/jpeg'))
-          response( array("status" => "error" , "data" => "Avatar Not Valid.") );
+              unset($params['avatar']);
+            }
 
-          unset($params['avatar']);
-          $img = isset($params['signature']) ? $params['signature'] : null ;
-          $tempFilename = strtolower(str_replace('-', '', $params['number'])) . "signature";
-          $uploadPath = $dir . $tempFilename . '.png';
+            $img = isset($params['signature']) ? $params['signature'] : null ;
+            $tempFilename = strtolower(str_replace('-', '', $params['number'])) . "signature";
+            $uploadPath = $dir . $tempFilename . '.png';
+              
+            if(($img && $func == 'update') || $func == 'insert'){
+              if(!$img || !upload($uploadPath, $img , 'image/png') )
+                response( array("status" => "error" , "data" => "Signature Not Valid.") );
 
-        if(!upload($uploadPath, $img , 'image/png') )
-          response( array("status" => "error" , "data" => "Signature Not Valid.") );
+              unset($params['signature']);
+            }
 
-          unset($params['signature']);
-
+          }
+        
           $json = file_get_contents($employees_file);
       		$array = json_decode($json, true);
 
           $array[$params['number']] = $params;
 
           if(file_put_contents($employees_file, json_encode($array)))
-            response( array("status" => "success" , "data" => "Employee Created.") );
+            response( array("status" => "success" , "data" => $response[$func]['success']) );
           else
-            response( array("status" => "error" , "data" => "Employee Error Creation.") );
+            response( array("status" => "error" , "data" => $response[$func]['error']) );
       break;
 
     case 'deleteEmployee' :

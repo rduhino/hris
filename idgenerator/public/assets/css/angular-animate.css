@@ -1,0 +1,16 @@
+.ng-enter, .ng-leave{
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition : all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+.ng-enter.ng-enter-active, .ng-leave{
+    opacity : 1;
+}
+.ng-leave.ng-leave-active, .ng-enter{
+    opacity: 0;
+}
+
+.form-edit-1, .form-edit-2{
+    display : none;
+}

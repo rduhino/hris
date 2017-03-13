@@ -15,7 +15,9 @@
     <link href="assets/css/fontawesome.css" rel="stylesheet">
     <link href="assets/css/helpers.css" rel="stylesheet">
     <link href="assets/css/notif.css" rel="stylesheet">
+    <link href="assets/css/angular-animate.css" rel="stylesheet">
     <link href="assets/css/animate.min.css" rel="stylesheet">
+    
 </head>
 
 <body ng-app = "hris" ng-controller="EmpController">
@@ -48,12 +50,11 @@
 		<a href=""><i class="fa fa-fire gray-text mg-r-10 fz-15"></i>Fire Employee</a>
 	</ul>
 
-	<p class="gray-text fz-10 fw-bld mg-l-20 mg-t-30"> FILTER EMPLOYEES</p>
+	<p class="gray-text fz-10 fw-bld mg-l-20 mg-t-30"> SORT EMPLOYEES</p>
 
-	<p><button class="no-brd green-bg pd-tb-5 pd-lr-20 white mg-l-20 mg-t-10 fw-reg fz-10"> FILTER BY NAME </button></p>
-	<p><button class="no-brd orange-bg pd-tb-5 pd-lr-20 white mg-l-20 mg-t-5 fw-reg fz-10"> FILTER BY JOB TITLE </button></p>
-	<p><button class="no-brd rose-bg pd-tb-5 pd-lr-20 white mg-l-20 mg-t-5 fw-reg fz-10"> FILTER BY AGE </button></p>
-	<p><button class="no-brd purple-bg pd-tb-5 pd-lr-20 white mg-l-20 mg-t-5 fw-reg fz-10"> FILTER BY ID NUMBER </button></p>
+	<p><button class="no-brd green-bg pd-tb-5 pd-lr-20 white mg-l-20 mg-t-10 fw-reg fz-10" ng-click="sort = 'name'"> SORT BY NAME </button></p>
+	<p><button class="no-brd orange-bg pd-tb-5 pd-lr-20 white mg-l-20 mg-t-5 fw-reg fz-10" ng-click="sort = 'title'"> SORT BY JOB TITLE </button></p>
+	<p><button class="no-brd purple-bg pd-tb-5 pd-lr-20 white mg-l-20 mg-t-5 fw-reg fz-10" ng-click="sort = 'number'"> SORT BY ID NUMBER </button></p>
 
 </div>
 
@@ -75,7 +76,8 @@
 				<div class="emp-img-con">
 					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg" alt="" employee-avatar>
 					<div class="id-nmbr"> {{employee.number}} </div>
-					<div class="emp-status green-bg fz-12 fw-reg"> Active </div>
+<!--                    <div ng-if="!employee.status" class="emp-status green-bg fz-12 fw-reg" > Active </div>-->
+					<div class="emp-status fz-12 fw-reg" ng-class="(employee.status) ? {0: 'green-bg', 1 : 'yellow-bg' , 2 : 'red-bg'}[employee.status] : 'green-bg'"  > {{employee.status ? empStatus[employee.status] : 'Active'}} </div>
 				</div>
 
 				<div class="emp-info-con">
@@ -96,7 +98,7 @@
 					<div class="actions-con mg-b-10">
 						<button class="fw-reg text-center act-btn card-btn gray-text white" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> VIEW </button>
 
-						<button class="fw-reg text-center act-btn card-btn gray-text white"> <i class="fa fa-fire mg-r-5"></i> DEACTIVATE </button>
+						<button class="fw-reg text-center act-btn card-btn gray-text white" ng-click='UpdateEmpStatus(employee.number)'> <i class="fa fa-fire mg-r-5"></i> DEACTIVATE </button>
 					</div>
 				</div>
 			</div>
@@ -105,9 +107,10 @@
 
 
 
-      <?php include 'view-emp-info-modal.php'; ?>
-      <?php include 'add-emp-modal.php'; ?>
-      <?php include 'delete-emp-modal.php'; ?>
+      <?php include 'partials/view-emp-info-modal.php'; ?>
+      <?php include 'partials/add-emp-modal.php'; ?>
+      <?php include 'partials/update-status-modal.php'; ?>
+      <?php include 'partials/cancel-edit-modal.php'; ?>
 
 		</div>
 	</div>
@@ -116,6 +119,7 @@
     <script src="assets/js/vendors-min.js"></script>
     <script src="assets/js/angular.min.js"></script>
     <script src="assets/js/angular-route.min.js"></script>
+    <script src="assets/js/angular-animate.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/app.js"></script>
     <script>

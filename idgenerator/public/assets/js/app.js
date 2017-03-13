@@ -1,23 +1,31 @@
-
-(function() {
-  'use strict';
-
-  /************* SERVICE *************/
-  var Service = function($http) {
-      var serviceBase = '../user_mgt/services/';
-      var obj = {};
-      obj.getEmployee = function() {
-          return $http.get("api/api.php?action=employees");
+(function () {
+    
+    'use strict';
+    
+    /************* SERVICE *************/
+    var Service = function ($http) {
+        
+      var serviceBase = 'api/api.php',
+          obj = {};
+        
+      obj.getEmployee = function () {
+          return $http.get (serviceBase + "?action=employees");
       }
 
-      obj.addEmployee = function(employee) {
-          return $http.post("api/api.php?action=addEmployee", employee).then(function(results) {
+      obj.addEmployee = function (employee) {
+          return $http.post (serviceBase + "?action=addEmployee", employee).then(function(results) {
               return results;
           });
       };
 
-      obj.deleteEmployee = function(employeeID) {
-        return $http.post("api/api.php?action=deleteEmployee&empid=" + employeeID).then(function(results) {
+      obj.updateEmployeeStatus = function(employee) {
+        return $http.post (serviceBase + "?action=updateEmployeeStatus", employee).then(function(results) {
+            return results;
+        });
+      }
+      
+      obj.updateEmployee = function(employee) {
+        return $http.post (serviceBase + "?action=updateEmployee", employee).then(function(results) {
             return results;
         });
       }
@@ -41,7 +49,6 @@
                     return attrs.ngSrc;
                 }, function (value) {
                     if (!value) {
-                       console.log(value)
                         element.attr('src', placeholder);
                     }
                 });
@@ -56,26 +63,25 @@
   var fileupload = function (){
         return {
             restrict: 'A',
-            link: function(scope, element, attrs, ngModel) {
+            link: function (scope, element, attrs, ngModel) {
                 element.bind("change", function(evt){
-                  var filesToUpload = evt.target.files;
-                  var file = filesToUpload[0];
-
-                  var img = document.createElement("img");
-                  var reader = new FileReader();
+                  var filesToUpload = evt.target.files,
+                      file = filesToUpload[0],
+                      img = document.createElement("img"),
+                      reader = new FileReader();
 
                   reader.onload = function(e){
                     img.src = e.target.result;
 
-                    var canvas = document.createElement("canvas");
-                    //var canvas = $("<canvas>", {"id":"testing"})[0];
-                    var ctx = canvas.getContext("2d");
+                    var canvas = document.createElement("canvas"),
+                        ctx = canvas.getContext("2d");
+                      
                     ctx.drawImage(img, 0, 0);
 
-                    var MAX_WIDTH = 230;
-                    var MAX_HEIGHT = 230;
-                    var width = img.width;
-                    var height = img.height;
+                    var MAX_WIDTH = 230,
+                        MAX_HEIGHT = 230,
+                        width = img.width,
+                        height = img.height;
 
                     // if (width > height) {
                     //   if (width > MAX_WIDTH) {
@@ -91,16 +97,16 @@
 
                     canvas.width = MAX_WIDTH; //width
                     canvas.height = MAX_HEIGHT; //height
-                    var ctx = canvas.getContext("2d");
+                    ctx = canvas.getContext("2d");
                     ctx.drawImage(img, 0, 0, MAX_HEIGHT, MAX_WIDTH);
 
-
+                    var dataurl = null;
                     if(attrs.id == 'avatar'){
-                      var dataurl = canvas.toDataURL("image/jpeg");
+                      dataurl = canvas.toDataURL("image/jpeg");
                       scope.add.employee.avatar = dataurl;
                     }
                     else{
-                      var dataurl = canvas.toDataURL("image/png");
+                      dataurl = canvas.toDataURL("image/png");
                       scope.add.employee.signature = dataurl;
                     }
 
@@ -158,15 +164,23 @@
   /************* CONTROLLER *************/
   var EmpController = function($scope, $sce, $timeout, Services){
       var uc = this;
-
+      var backUpEmployee = {};
+      
       $scope.employees = {};
-      $scope.origemployees = {}
-
+      $scope.origemployees = {};
+      
+      $scope.sort = 'name';
+      
       $scope.view = {};
       $scope.add = {};
+      $scope.update = {};
 
       $scope.searchExp = "";
       $scope.pdfid = '';
+      $scope.onEdit = false;
+      $scope.noView = false;
+      
+      $scope.empStatus = ["Active","Resigned","Terminated"];
 
       $scope.notifConfig = {show: false, message: null, head: "Success", type: 'success',
                             set : function(options){
@@ -190,28 +204,92 @@
 
       Services.getEmployee().then(function(response) {
           if(response.data.status == "success"){
-            $scope.employees = response.data.data
+            //$scope.tmpemployees = response.data.data; 
+            $scope.employees = response.data.data;
 
-            uc.sortEmployees();
-          }
-
-          $scope.ViewEmployee = function(id){
-            $.each($scope.employees, function(number, emp){
-              if(number == id){
-                $scope.view.employee = emp;
-              }
+            uc.setEmployees();
+              
+            $scope.$watch('sort', function(value){
+                //TODO: SORT FUNCTION
             });
+          }
+          
+          /** VIEW TO EDIT **/
+          $scope.ViewEmployee = function(id){
+              $scope.view.employee = $scope.employees[id];
           };
+          
+          $scope.ToggleEdit = function (element){
+              backUpEmployee = angular.copy($scope.view.employee);
+              
+              if(typeof element == "undefined"){
+                for(var ctr = 1 ; ctr <= 2 ; ctr++){
+                    $scope.ToggleEdit(ctr);
+                }
+              }else{
+                $('.form-edit-' + element).toggle();
+                $('.form-info-' + element).toggle();
+                $('#EditEmployeeForm').toggleClass('editing-' + element);
+              } 
+              
+              $scope.onEdit = uc.CheckIfEditing();
+              
+              return true;
+          }
+          
+          $scope.CloseEdit = function (element){
+             
+             if(typeof element == 'undefined'){
+                 $('#cancelEdit').modal ({ backdrop: 'static', keyboard: false })
+                 .one('click', '#yesCancel', function () {
+                    var vm = this;
 
-          $scope.DeleteEmployee = function(id){
-            $('#deleteEmployee').modal({ backdrop: 'static', keyboard: false })
-            .on('click', '#delete', function() {
-                var vm = this;
-                Services.deleteEmployee(id).then(function(response){
+                    $scope.view.employee = angular.copy(backUpEmployee);
+
+                    if(typeof element == 'undefined')
+                        $scope.noView = true;
+
+                    if($scope.ToggleEdit(element))
+                        $(vm).closest(".modal").modal('hide');
+
+                })
+             }else{
+                  $scope.view.employee = backUpEmployee;
+                  $scope.ToggleEdit(element);
+             }
+
+          }
+           
+          $scope.UpdateEmployee = function(element){
+              $scope.update.employee = {};
+              $scope.update.employee = $scope.view.employee;
+              
+              Services.updateEmployee( $scope.update.employee).then(function(response){
                   if(response.data.status == "success"){
-                    delete $scope.employees[id];
-                    delete $scope.origemployees[id];
+                    uc.setEmployees();
+                    $scope.ToggleEdit(element);
+                  }
 
+                  $scope.notifConfig.set({
+                    message : response.data.data,
+                    type : response.data.status
+                  });
+
+              });
+          }
+          
+          
+          /** UPDATE STATUS **/
+          $scope.UpdateEmpStatus = function(id){
+            $scope.update.employee = {};
+            $scope.update.employee = $scope.employees[id];
+              
+            $('#updateEmployeeStatus').modal ({ backdrop: 'static', keyboard: false })
+            .one('click', '#update', function () {
+                var vm = this;
+                Services.updateEmployeeStatus( $scope.update.employee).then(function(response){
+                  if(response.data.status == "success"){
+                    uc.setEmployees();
                     $(vm).closest(".modal").modal('toggle');
                   }
 
@@ -223,11 +301,13 @@
                 });
             });
           };
-
-          $scope.SearchEmployee = function(){
+          
+          
+          /** SEARCH EMPLOYEE **/
+          $scope.SearchEmployee = function (){
             var search = $scope.searchExp.toLowerCase();
             $scope.employees = {};
-            var obj = {};
+
             $.each($scope.origemployees, function(number, emp){
               if(emp.name){
                 if(emp.name.toLowerCase().indexOf(search) > -1){
@@ -236,11 +316,11 @@
               }
             });
           };
-
+          
           $scope.SetPdf = function(id, position){
-            $scope.pdfid = 'bank.php?p=' + position + '&&id='+ id;
+            $scope.pdfid = 'api/bank.php?p=' + position + '&&id='+ id;
             $timeout(function (){
-                  window.frames['objAdobePrint'].print();
+                  window.frames.objAdobePrint.print();
             }, 1000);
           }
 
@@ -250,29 +330,31 @@
           $scope.add.employee = {};
           document.getElementById("EmployeeForm").reset();
           $scope.add.employee.number = "GWO-";
+          $scope.add.employee.status = 0;
+          $scope.add.employee.datehired = new Date();
       }
 
       $scope.AddUser = function(){
           var msg = "";
           var skip = false;
-
+          
           if(typeof $scope.employees[$scope.add.employee.number] != 'undefined' ){
             msg = "Employee already exist!";
             skip = true;
           }
 
           if(!skip && !$scope.add.employee.avatar){
-            msg =  'Please Upload an ID Picture!',
+            msg =  'Please Upload an ID Picture!';
             skip = true;
           }
 
           if(!skip && !$scope.add.employee.signature){
-            msg =  'Please Upload an ID Picture!',
+            msg =  'Please Upload a Signature Picture!';
             skip = true;
           }
 
           if(!skip && $scope.add.employee.number == 'GWO-'){
-            msg =  'Please Add Employee ID Number',
+            msg =  'Please Add Employee ID Number';
             skip = true;
           }
 
@@ -281,7 +363,7 @@
               Services.addEmployee($scope.add.employee).then(function(response) {
                 if(response.data.status == "success"){
                   $scope.employees[$scope.add.employee.number] = $scope.add.employee;
-                  uc.sortEmployees();
+                  uc.setEmployees();
                   $('#showAddEmpModal').modal('toggle');
                 }
 
@@ -297,8 +379,6 @@
                 type : 'error'
               });
             }
-
-
             return;
           }
 
@@ -309,27 +389,68 @@
 
       }
 
-      uc.sortEmployees = function(){
+      uc.setEmployees = function(){
         var tmpObj = {};
         Object.keys($scope.employees).sort().forEach( function(key){
           tmpObj[key] = $scope.employees[key];
+            
         });
-
-        $scope.origemployees = $scope.employees = tmpObj;
+        
+        $scope.employees = tmpObj;
+        $scope.origemployees = angular.copy($scope.employees);  
+        //Animate List
+        //Object.keys($scope.tmpemployees).sort().forEach( function(key, index){
+            //$timeout(function (){
+                //$scope.employees[key] = $scope.tmpemployees[key];    
+                //$scope.origemployees = $scope.employees;
+            //}, 150 * index);
+        //});
+          
       }
-  }
+      
 
-  var app = angular.module('hris',['ngRoute'])
-                   .service('Services', ['$http', Service])
-                   .filter('ConvertIdToImage', ConvertIdToImage)
-                   .controller('EmpController', EmpController)
-                   .directive('employeeAvatar', employeeAvatar)
-                   .directive('fileupload', fileupload)
-                   .directive('notification', ['$timeout', dirNotification])
-  //
+      uc.CheckIfEditing = function (){        
+          for(var ctr = 1 ; ctr <= 2 ; ctr++){
+            if($('#EditEmployeeForm').hasClass('editing-' + ctr))
+                return true;
+          }
+
+          return false;
+      }
+      
+      $('#cancelEdit').on("hidden.bs.modal", function(e){
+          if(!$scope.noView)
+            $('#showViewEmpModal').modal('show');
+          else{
+            for(var ctr = 1 ; ctr <= 2 ; ctr++){
+                    $('.form-edit-' + ctr).hide();
+                    $('.form-info-' + ctr).show();
+                    $('#EditEmployeeForm').removeClass('editing-' + ctr);
+            }  
+              $scope.onEdit = false;
+          }
+          $scope.noView = false;
+      });
+      
+      $('#cancelEdit').on("show.bs.modal", function(e){
+          $('#showViewEmpModal').modal('hide');
+      });
+      
+      $('#updateEmployeeStatus').on("shown.bs.modal", function(e){
+          $("#EmpStats").val($scope.update.employee.status);
+      });
+  }
+  
+  var app = angular.module ('hris', ['ngRoute', 'ngAnimate'])
+                   .service ('Services', ['$http', Service])
+                   .filter ('ConvertIdToImage', ConvertIdToImage)
+                   .controller ('EmpController', EmpController)
+                   .directive ('employeeAvatar', employeeAvatar)
+                   .directive ('fileupload', fileupload)
+                   .directive ('notification', ['$timeout', dirNotification]);
+    
   EmpController.$inject = ['$scope', '$sce', '$timeout', 'Services'];
 
-  // $('#deleteEmployee').modal({ backdrop: 'static', keyboard: false })
 })();
 
 
@@ -380,86 +501,4 @@ $(function() {
         }
     });
 
-});
-
-// SIDEBAR SELECT
-var selector = $('.sidebar ul li'),
-	empList = $('.main.employeeList'),
-	empAddNew = $('.main.addNewEmployee');
-	empAddNew.hide();
-
-selector.on('click', function(e){
-	e.preventDefault();
-
-    $(selector).removeClass('active');
-    $(this).addClass('active');
-
-    var current = $(this).find('a').attr('href');
-    switch (current) {
-    	case '#add_new_employee':
-    		$('input[type ="text"]').val("");
-    		$('textarea').val("");
-    		$('.addNewEmployee .page-header').text("Add New Employee");
-    		empList.hide(); empAddNew.fadeIn();
-    	break;
-    	case '#employee_list':
-    		empAddNew.hide(); empList.fadeIn();
-    	break;
-    }
-});
-
-// IMAGE POPUP
-$('.imagepop').on('click', function(e) {
-	e.preventDefault();
-
-	$('.imagepreview').attr('src', $(this).attr('href'));
-	$('#imagemodal').modal('show');
-});
-
-$('.glyphicon-edit').on('click', function(e) {
-	e.preventDefault();
-	var tr = $(this).parents('tr');
-
-	$(".formContainer input[name='number']").val( $(tr).find('td:first-child').text() );
-	$(".formContainer input[name='fullname']").val( $(tr).find('td:nth-child(3)').text() );
-	$(".formContainer input[name='nickname']").val( $(tr).find('td:nth-child(2)').text() );
-	$(".formContainer input[name='title']").val( $(tr).find('td:nth-child(4)').text() );
-
-	// $(".formContainer input[name='address']").val();
-	$(".formContainer input[name='contact']").val( $(tr).find('td:nth-child(6)').text() );
-	$(".formContainer input[name='tin']").val( $(tr).find('td:nth-child(7)').text() );
-	$(".formContainer input[name='sss']").val( $(tr).find('td:nth-child(8)').text() );
-	$(".formContainer input[name='emergency_name']").val( $(tr).find('td:nth-child(9)').text() );
-	$(".formContainer input[name='emergency_number']").val( $(tr).find('td:nth-child(10)').text() );
-
-	$('.addNewEmployee .page-header').text("Edit Employee");
-
-	empAddNew.show();
-	empList.hide();
-});
-
-
-// LIVE search
-$(document).ready(function(){
-    $("#filter").keyup(function(){
-
- 		var empList = $('.main.employeeList');
- 		if( empList.css('display') == 'none' ) {
- 			$('.main.addNewEmployee').css('display','none');
-			empList.css('display','block');
-			$('ul.nav.nav-sidebar > li:last-child').removeClass('active');
-			$('ul.nav.nav-sidebar > li:first-child').addClass('active');
-		}
-        var filter = $(this).val(), count = 0;
-
-        $(".main.employeeList table tbody tr").each(function(){
-
-            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-            	$(this).hide();
-            } else {
-                $(this).show();
-                count++;
-            }
-        });
-    });
 });
