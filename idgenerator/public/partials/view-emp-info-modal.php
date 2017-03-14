@@ -3,7 +3,7 @@
 
     <div class="modal-content no-brd bd-rd-none pd-20 no-bx-sdw">
 
-		
+
     <div class="white-bg">
  		<div class="clearfix"></div>
 	</div>
@@ -15,39 +15,38 @@
             <i class="fa fa-pencil mg-r-5 gray-bg white pull-right form-info-1 fz-14 update-emp-status-btn" ng-click="ToggleEdit(1)"></i>
             <i class="fa fa-close pull-right form-edit-1 update-emp-status-btn orange-bg" ng-click="CloseEdit(1)"></i>
             <i class="fa fa-check pull-right form-edit-1 update-emp-status-btn green-bg" ng-click="UpdateEmployee(1)"></i>
-            
+
 	        <label class="img-uploader-thumb mg-t-20 form-edit-1">
-	            <input id="inputImage2"
-	                type="file"
-	                accept="image/png"
-	                image="cs.image"
-	                resize-max-height="230"
-	                resize-max-width="230"
-	                resize-type="image/png"/>
-	            <img height="230" width="230" ng-src="images/{{ view.employee.number | ConvertIdToImage : '-' : ''}}.jpg" employee-avatar/>
+	            <input id="editAvatar"
+                type="file"
+                accept="image/jpeg"
+                image="cs.image"
+                resize-max-height="230"
+                resize-max-width="230"
+                resize-type="image/jpeg" fileupload/>
+              <img width = '230' height= '230' ng-src="{{view.employee.avatar ?  view.employee.avatar : 'images/' + (view.employee.number | ConvertIdToImage : '-' : '') + '.jpg??decache=' + decache}}"/>
 	        </label>
-            
             <label class="img-uploader-thumb mg-t-20 form-info-1">
-                <img height="230" width="230" ng-src="images/{{ view.employee.number | ConvertIdToImage : '-' : ''}}.jpg" employee-avatar/>
+                <img height="230" width="230" ng-src="images/{{ view.employee.number | ConvertIdToImage : '-' : ''}}.jpg?decache={{decache}}" employee-avatar/>
             </label>
-            
+
 	        <div class="clearfix"></div>
-	    
+
             <h3 class="gray-text text-center fw-bld mg-tb-5 form-info-1"> {{view.employee.name}} ({{view.employee.nickname}})</h3>
             <div class="col-md-12 form-edit-1 fw-bld ">
                 <div class="col-md-8">
                     <p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Full Name </p>
               		<input class="global-inpt w100" type="text" name="name" placeholder="Full Name" ng-model="view.employee.name" required/>
                 </div>
-                
+
                 <div class="col-md-4 ">
                     <p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Nick Name </p>
               		<input class="global-inpt w100" type="text" name="nickname" placeholder="Nick Name" ng-model="view.employee.nickname" required/>
                 </div>
-                
+
             </div>
             <div class="clearfix"></div>
-            
+
             <p class="gray-text text-center fz-12 no-mg form-info-1"> {{view.employee.title}}</p>
             <div class="col-md-12 form-edit-1 fw-bld form-edit-1">
                 <div class="col-md-12">
@@ -64,10 +63,10 @@
                         <option value="Sales Executive"> Sales Executive </option>
                         <option value="Admin Staff"> Admin Staff </option>
                     </select>
-                </div>  
+                </div>
             </div>
             <div class="clearfix"></div>
-            
+
 			<div class="row pd-20">
 				<h2 class="pull-left gray-text fw-bld fz-14"> <i class="fa fa-reorder mg-r-10"></i>EMPLOYEE INFORMATION</h2>
 				<div class="clearfix"></div>

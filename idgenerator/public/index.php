@@ -17,7 +17,7 @@
     <link href="assets/css/notif.css" rel="stylesheet">
     <link href="assets/css/angular-animate.css" rel="stylesheet">
     <link href="assets/css/animate.min.css" rel="stylesheet">
-    
+
 </head>
 
 <body ng-app = "hris" ng-controller="EmpController">
@@ -74,7 +74,7 @@
       <!-- User Box -->
 			<div class="emp-list-box" ng-repeat="employee in employees">
 				<div class="emp-img-con">
-					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg" alt="" employee-avatar>
+					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg?decache={{decache}}" alt="" employee-avatar>
 					<div class="id-nmbr"> {{employee.number}} </div>
 <!--                    <div ng-if="!employee.status" class="emp-status green-bg fz-12 fw-reg" > Active </div>-->
 					<div class="emp-status fz-12 fw-reg" ng-class="(employee.status) ? {0: 'green-bg', 1 : 'yellow-bg' , 2 : 'red-bg'}[employee.status] : 'green-bg'"  > {{employee.status ? empStatus[employee.status] : 'Active'}} </div>

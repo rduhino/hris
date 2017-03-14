@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
     case 'updateEmployee' : $func = $func == 'insert' ? 'update' : $func;
     case 'addEmployee':
           $img = false;
-          
+
           $response = array(
                         'insert' => array(
                                 'error'   => 'Employee Error Creation.',
@@ -54,11 +54,11 @@ if (isset($_GET['action'])) {
           $params = json_decode(file_get_contents('php://input'),true);
           
           if($func == 'insert' || $func =='update'){
-              
+
             $img = isset($params['avatar']) ? $params['avatar'] : false;
             $tempFilename = strtolower(str_replace('-', '', $params['number']));
             $uploadPath = $dir . $tempFilename . '.jpg';
-            
+
             if(($img && $func == 'update') || $func == 'insert'){
               if (!$img || !upload($uploadPath, $img, 'image/jpeg'))
                 response( array("status" => "error" , "data" => "Avatar Not Valid.") );
@@ -69,7 +69,7 @@ if (isset($_GET['action'])) {
             $img = isset($params['signature']) ? $params['signature'] : null ;
             $tempFilename = strtolower(str_replace('-', '', $params['number'])) . "signature";
             $uploadPath = $dir . $tempFilename . '.png';
-              
+
             if(($img && $func == 'update') || $func == 'insert'){
               if(!$img || !upload($uploadPath, $img , 'image/png') )
                 response( array("status" => "error" , "data" => "Signature Not Valid.") );
@@ -78,7 +78,7 @@ if (isset($_GET['action'])) {
             }
 
           }
-        
+
           $json = file_get_contents($employees_file);
       		$array = json_decode($json, true);
 

@@ -104,8 +104,10 @@
                     if(attrs.id == 'avatar'){
                       dataurl = canvas.toDataURL("image/jpeg");
                       scope.add.employee.avatar = dataurl;
-                    }
-                    else{
+                    }else if(attrs.id == 'editAvatar'){
+                      dataurl = canvas.toDataURL("image/jpeg");
+                      scope.view.employee.avatar = dataurl;
+                    }else{
                       dataurl = canvas.toDataURL("image/png");
                       scope.add.employee.signature = dataurl;
                     }
@@ -177,6 +179,7 @@
 
       $scope.searchExp = "";
       $scope.pdfid = '';
+      $scope.decache = new Date().getTime();
       $scope.onEdit = false;
       $scope.noView = false;
 
@@ -281,17 +284,19 @@
              }else{
               $('#showViewEmpModal').modal('hide');
              }
-             
+
 
           }
 
           $scope.UpdateEmployee = function(element){
               $scope.update.employee = {};
-              $scope.update.employee = $scope.view.employee;
+              $scope.update.employee = angular.copy($scope.view.employee);
 
               Services.updateEmployee( $scope.update.employee).then(function(response){
                   if(response.data.status == "success"){
-                    uc.initEmployees();
+                    $scope.view.employee.avatar = null;
+                    uc.initEmployees($scope.update.employee.number);
+                    $scope.decache = new Date().getTime();
                     $scope.ToggleEdit(element);
                   }
 
@@ -314,7 +319,7 @@
                 var vm = this;
                 Services.updateEmployeeStatus( $scope.update.employee).then(function(response){
                   if(response.data.status == "success"){
-                    uc.initEmployees();
+                    uc.initEmployees($scope.update.employee.number);
                     $(vm).closest(".modal").modal('hide');
                   }
 
@@ -394,7 +399,7 @@
               Services.addEmployee($scope.add.employee).then(function(response) {
                 if(response.data.status == "success"){
                   $scope.employees[$scope.add.employee.number] = $scope.add.employee;
-                  uc.initEmployees();
+                  uc.initEmployees($scope.add.employee.number);
                   $('#showAddEmpModal').modal('hide');
                 }
 
@@ -420,9 +425,17 @@
 
       }
 
-      uc.initEmployees = function(){
-        $scope.origemployees = angular.copy($scope.employees);
+      uc.initEmployees = function(id){
+        if(typeof id == "undefined"){
+          $.each($scope.employees, function(k, obj){
+            $scope.origemployees[k] = angular.copy(obj);
+          });
+        }else{
+           $scope.origemployees[id] = angular.copy($scope.employees[id]);
+        }
+
       }
+
       uc.setEmployees = function(){
         var tmpObj = {};
         // Object.keys($scope.employees).sort().forEach( function(key){
