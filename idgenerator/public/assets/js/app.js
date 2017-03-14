@@ -259,25 +259,29 @@
           }
 
           $scope.CloseEdit = function (element){
+             if($scope.onEdit){
+               if(typeof element == 'undefined'){
+                   $('#cancelEdit').modal ({ backdrop: 'static', keyboard: false })
+                   .one('click', '#yesCancel', function () {
+                      var vm = this;
 
-             if(typeof element == 'undefined'){
-                 $('#cancelEdit').modal ({ backdrop: 'static', keyboard: false })
-                 .one('click', '#yesCancel', function () {
-                    var vm = this;
+                      $scope.view.employee = angular.copy(backUpEmployee);
 
-                    $scope.view.employee = angular.copy(backUpEmployee);
+                      if(typeof element == 'undefined')
+                          $scope.noView = true;
 
-                    if(typeof element == 'undefined')
-                        $scope.noView = true;
+                      if($scope.ToggleEdit(element))
+                          $(vm).closest(".modal").modal('hide');
 
-                    if($scope.ToggleEdit(element))
-                        $(vm).closest(".modal").modal('hide');
-
-                })
+                  })
+               }else{
+                    $scope.view.employee = backUpEmployee;
+                    $scope.ToggleEdit(element);
+               }
              }else{
-                  $scope.view.employee = backUpEmployee;
-                  $scope.ToggleEdit(element);
+              $('#showViewEmpModal').modal('hide');
              }
+             
 
           }
 

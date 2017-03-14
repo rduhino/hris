@@ -1,7 +1,7 @@
 <div class="modal fade bs-example-modal-lg" tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel" id="cancelEdit" aria-hidden="true">
   <div class="modal-dialog modal-md ">
       <div class="modal-body white-bg no-brd no-mg no-bx-sdw gray-text pd-t-20">
-          <i class="fa fa-close fz-18 mg-r-10 mg-l-10" aria-hidden="true"></i>Disregard Changes in Edit Employee?
+          <i class="fa fa-reply fz-18 mg-r-10 mg-l-10" aria-hidden="true"></i>Discard changes in edit Employee?
       </div>
       <div class="modal-footer white-bg no-brd no-mg no-bx-sdw pd-15">
           <div class="col-md-12 mg-t-20">

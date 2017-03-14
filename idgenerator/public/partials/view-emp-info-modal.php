@@ -6,9 +6,6 @@
 		
     <div class="white-bg">
  		<div class="clearfix"></div>
-        <button ng-show="onEdit" type="button" class="close pull-right" aria-label="Close" ng-click="CloseEdit()"><span aria-hidden="true"><i class="fa fa-remove"></i></span></button>
-        
-		<button ng-show="!onEdit" type="button" class="close pull-right" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true"><i class="fa fa-remove"></i></span></button>
 	</div>
 
 	<div class="clearfix"></div>
@@ -83,7 +80,7 @@
                 </div>
 			    <div class="col-md-6 mg-t-20 pd-r-5">
 
-		    		<p class="gray-text fz-12 fw-bld no-mg"> COMPLETE ADDRESS:</p>
+		    		<p class="gray-text fz-12 no-mg"> Complete Address:</p>
 	  			 	<p class="fw-reg fz-12 gray-text">
                         <span class="form-info-2 ">{{view.employee.address}}</span>
                         <span class="form-edit-2 pd-r-5">
@@ -91,7 +88,7 @@
                         </span>
                     </p>
 
-	  	    		<p class="gray-text fz-12 fw-bld no-mg"> CONTACT NO.:</p>
+	  	    		<p class="gray-text fz-12 no-mg"> Contact No.:</p>
 	  			 	<p class="fw-reg fz-12 gray-text">
                         <span class="form-info-2 ">{{view.employee.contact}}</span>
                         <span class="form-edit-2 pd-r-5">
@@ -99,7 +96,7 @@
                         </span>
                     </p>
 
-	  			 	<p class="gray-text fz-12 fw-bld no-mg"> SSS NO.:</p>
+	  			 	<p class="gray-text fz-12 no-mg"> SSS No.:</p>
 	  			 	<p class="fw-reg fz-12 gray-text">
                         <span class="form-info-2 ">{{view.employee.sss}}</span>
                         <span class="form-edit-2 pd-r-5">
@@ -107,7 +104,7 @@
                         </span>
                     </p>
 
-	  			 	<p class="gray-text fz-12 fw-bld no-mg"> TIN NO.:</p>
+	  			 	<p class="gray-text fz-12 no-mg"> TIN No.:</p>
 	  			 	<p class="fw-reg fz-12 gray-text">
                         <span class="form-info-2 ">{{view.employee.tin}}</span>
                         <span class="form-edit-2 pd-r-5">
@@ -191,8 +188,11 @@
 
 	    <!-- Action Buttons Here -->
         <div class="col-md-12 no-pd">
-            <button class="pull-right white mg-t-20 fz-12 bd-rd-none orange-bg no-brd pd-lr-30 pd-tb-10 fw-bld" type="submit" name="submit" data-dismiss="modal" aria-label="Close"> <i class="fa fa-remove mg-r-5"></i>CANCEL</button>
-            <button class="pull-right white mg-t-20 fz-12 bd-rd-none green-bg no-brd pd-lr-30 pd-tb-10 fw-bld mg-r-10" data-dismiss="modal" type="submit" name="submit"> <i class="fa fa-check mg-r-5"></i>UPDATE</button>
+            <!-- <button class="pull-right white mg-t-20 fz-12 bd-rd-none orange-bg no-brd pd-lr-30 pd-tb-10 fw-bld" type="submit" name="submit" data-dismiss="modal" aria-label="Close"> <i class="fa fa-remove mg-r-5"></i>CANCEL</button>
+            <button class="pull-right white mg-t-20 fz-12 bd-rd-none green-bg no-brd pd-lr-30 pd-tb-10 fw-bld mg-r-10" data-dismiss="modal" type="submit" name="submit"> <i class="fa fa-check mg-r-5"></i>UPDATE</button> -->
+
+
+ 		<button type="button" class="pull-right mg-t-20 fz-12 bd-rd-none orange-bg no-brd pd-lr-30 pd-tb-10 fw-bld no-animate white" aria-label="Close" ng-click="CloseEdit()"><span><i class="fa fa-remove mg-r-5 fz-14"></i> CLOSE </span></button>
         </div>
         <div class="clearfix"></div>
 	  </div>
