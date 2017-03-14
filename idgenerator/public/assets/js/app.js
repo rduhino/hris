@@ -171,7 +171,7 @@
       $scope.employees = {};
       $scope.origemployees = {};
 
-      $scope.sort = 'name';
+      $scope.sort = 'number';
 
       $scope.view = {};
       $scope.add = {};
@@ -183,7 +183,7 @@
       $scope.onEdit = false;
       $scope.noView = false;
 
-      $scope.empStatus = ["Active","Resigned","Terminated"];
+      $scope.empStatus = ["Active","Resigned","EoC","Terminated"];
 
       $scope.notifConfig = {show: false, message: null, head: "Success", type: 'success',
                             set : function(options){
@@ -438,20 +438,21 @@
 
       uc.setEmployees = function(){
         var tmpObj = {};
-        // Object.keys($scope.employees).sort().forEach( function(key){
-        //   tmpObj[key] = $scope.employees[key];
-        //
-        // });
-
-        // $scope.employees = tmpObj;
-        // $scope.origemployees = angular.copy($scope.employees);
-        //Animate List
-        Object.keys($scope.tmpemployees).sort().forEach( function(key, index){
-            $timeout(function (){
-                $scope.employees[key] = $scope.tmpemployees[key];
-                $scope.origemployees = angular.copy($scope.employees);
-            }, 50 * index);
+        Object.keys($scope.tmpemployees).sort().forEach( function(key){
+          tmpObj[key] = $scope.tmpemployees[key];
+        
         });
+
+        $scope.employees = tmpObj;
+        $scope.origemployees = angular.copy($scope.employees);
+
+        //Animate List
+        // Object.keys($scope.tmpemployees).sort().forEach( function(key, index){
+        //     $timeout(function (){
+        //         $scope.employees[key] = $scope.tmpemployees[key];
+        //         $scope.origemployees = angular.copy($scope.employees);
+        //     }, 50 * index);
+        // });
 
       }
 

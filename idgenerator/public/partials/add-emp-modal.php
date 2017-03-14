@@ -53,6 +53,7 @@
               	<div class="col-md-6">
               		<p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Job Title </p>
               		<select class="global-slct w100" type="submit" name="title" placeholder="Job Title" ng-model="add.employee.title" required/>
+                        <option value="" selected disabled> Select Designation </option>
                         <option value="Human Resource"> Human Resource </option>
                         <option value="Web Developer"> Web Developer </option>
                         <option value="Web Designer"> Web Designer </option>

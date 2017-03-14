@@ -180,9 +180,9 @@ ul.sidebar-mnu a:hover, .current i {
 }
 
 .nav-hdr {
-  background: #4c94e5;
+  background: linear-gradient(60deg, #c93d5b 5%, #f5903e 100%);
   /*border-bottom: 5px solid #2d71be;*/
-  padding: 10px 0;
+  padding: 15px 0;
   position: fixed;
   top:0;
   width: 100%;
@@ -220,9 +220,13 @@ ul.sidebar-mnu a:hover, .current i {
 .emp-img-con img {
   width: 100%;
   cursor: pointer;
-  transition: all .5s ease-in-out;
-  -webkit-transition: all .5s ease-in-out;
-  -moz-transition: all .5s ease-in-out;
+  transition: all 5s ease-in-out;
+  -webkit-transition: all 5s ease-in-out;
+  -moz-transition: all 5s ease-in-out;
+}
+
+.emp-img-con:hover > img {
+  transform: scale(1.5);
 }
 
 .emp-info-con {
@@ -246,10 +250,17 @@ ul.sidebar-mnu a:hover, .current i {
   border-radius: 50px;
   overflow: hidden;
   cursor: pointer;
+  transition: all .7s ease-in-out;
+  -webkit-transition: all .7s ease-in-out;
+  -moz-transition: all .7s ease-in-out;
 }
 
 .user-img-con img {
   width: 100%;
+}
+
+.user-img-con:hover {
+  transform: rotate(360deg);
 }
 
 .id-nmbr {

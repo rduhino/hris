@@ -24,7 +24,7 @@
                 resize-max-height="230"
                 resize-max-width="230"
                 resize-type="image/jpeg" fileupload/>
-              <img width = '230' height= '230' ng-src="{{view.employee.avatar ?  view.employee.avatar : 'images/' + (view.employee.number | ConvertIdToImage : '-' : '') + '.jpg??decache=' + decache}}"/>
+              <img width = '230' height= '230' ng-src="{{view.employee.avatar ?  view.employee.avatar : 'images/' + (view.employee.number | ConvertIdToImage : '-' : '') + '.jpg?decache=' + decache}}"/>
 	        </label>
             <label class="img-uploader-thumb mg-t-20 form-info-1">
                 <img height="230" width="230" ng-src="images/{{ view.employee.number | ConvertIdToImage : '-' : ''}}.jpg?decache={{decache}}" employee-avatar/>
@@ -36,12 +36,12 @@
             <div class="col-md-12 form-edit-1 fw-bld ">
                 <div class="col-md-8">
                     <p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Full Name </p>
-              		<input class="global-inpt w100" type="text" name="name" placeholder="Full Name" ng-model="view.employee.name" required/>
+              		<input class="global-inpt w100 fw-light" type="text" name="name" placeholder="Full Name" ng-model="view.employee.name" required/>
                 </div>
 
                 <div class="col-md-4 ">
                     <p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Nick Name </p>
-              		<input class="global-inpt w100" type="text" name="nickname" placeholder="Nick Name" ng-model="view.employee.nickname" required/>
+              		<input class="global-inpt w100 fw-light" type="text" name="nickname" placeholder="Nick Name" ng-model="view.employee.nickname" required/>
                 </div>
 
             </div>
@@ -51,7 +51,8 @@
             <div class="col-md-12 form-edit-1 fw-bld form-edit-1">
                 <div class="col-md-12">
                     <p for="" class="fz-10 gray-text fw-reg mg-t-10 mg-b-0"> Job Title </p>
-              		<select class="global-slct w100 gray-text" type="submit" name="title" placeholder="Job Title" ng-model="view.employee.title" required/>
+              		<select class="global-slct w100 gray-text fw-light" type="submit" name="title" placeholder="Job Title" ng-model="view.employee.title" required/>
+                        <option value="" selected disabled> Select Designation </option>
                         <option value="Human Resource"> Human Resource </option>
                         <option value="Web Developer"> Web Developer </option>
                         <option value="Web Designer"> Web Designer </option>

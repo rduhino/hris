@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="assets/images/favicon.png">
 
-    <title>HRIS</title>
+    <title> Verticalops HRIS </title>
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/dashboard.css" rel="stylesheet">
@@ -29,13 +29,13 @@
 
 	<div class="col-md-6">
 
-		<a href=""><button class="blue-bg opac-80 white pd-tb-5 pd-lr-20 fz-12 no-brd pull-right fw-reg bd-rd-50"> LOGOUT </button></a>
+		<a href=""><button class="orange-bg white pd-tb-5 pd-lr-20 fz-12 no-brd pull-right fw-reg bd-rd-50"> LOGOUT </button></a>
 
 		<div class="pull-right mg-r-20">
 			<div class="user-img-con pull-right">
 				<img src="assets/images/anne.jpg" alt="">
 			</div>
-			<p class="pull-right white fw-light fz-12 mg-r-10 lh-25 mg-tb-0"> Admin </p>
+			<p class="pull-right white fw-light fz-12 mg-r-10 lh-25 mg-tb-0"> Howdy, Admin! </p>
 		</div>
 	</div>
 </div>
@@ -77,7 +77,7 @@
 					<img ng-src="images/{{ employee.number | ConvertIdToImage : '-' : ''}}.jpg?decache={{decache}}" alt="" employee-avatar>
 					<div class="id-nmbr"> {{employee.number}} </div>
 <!--                    <div ng-if="!employee.status" class="emp-status green-bg fz-12 fw-reg" > Active </div>-->
-					<div class="emp-status fz-12 fw-reg" ng-class="(employee.status) ? {0: 'green-bg', 1 : 'yellow-bg' , 2 : 'red-bg'}[employee.status] : 'green-bg'"  > {{employee.status ? empStatus[employee.status] : 'Active'}} </div>
+					<div class="emp-status fz-12 fw-reg" ng-class="(employee.status) ? {0: 'green-bg', 1 : 'yellow-bg' , 2 : 'orange-bg' , 3  : 'red-bg'}[employee.status] : 'green-bg'"  > {{employee.status ? empStatus[employee.status] : 'Active'}} </div>
 				</div>
 
 				<div class="emp-info-con">
@@ -98,7 +98,7 @@
 					<div class="actions-con mg-b-10">
 						<button class="fw-reg text-center act-btn card-btn gray-text white" data-toggle="modal" data-target="#showViewEmpModal" ng-click="ViewEmployee(employee.number)"> <i class="fa fa-eye mg-r-5"></i> VIEW </button>
 
-						<button class="fw-reg text-center act-btn card-btn gray-text white" ng-click='UpdateEmpStatus(employee.number)'> <i class="fa fa-fire mg-r-5"></i> DEACTIVATE </button>
+						<button class="fw-reg text-center act-btn card-btn gray-text white" ng-click='UpdateEmpStatus(employee.number)'> <i class="fa fa-fire mg-r-5"></i> STATUS </button>
 					</div>
 				</div>
 			</div>
