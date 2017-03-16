@@ -107,6 +107,9 @@
                     }else if(attrs.id == 'editAvatar'){
                       dataurl = canvas.toDataURL("image/jpeg");
                       scope.view.employee.avatar = dataurl;
+                    }else if (attrs.id == 'editSignature'){
+                      dataurl = canvas.toDataURL("image/png");
+                      scope.view.employee.signature = dataurl;
                     }else{
                       dataurl = canvas.toDataURL("image/png");
                       scope.add.employee.signature = dataurl;
@@ -440,7 +443,7 @@
         var tmpObj = {};
         Object.keys($scope.tmpemployees).sort().forEach( function(key){
           tmpObj[key] = $scope.tmpemployees[key];
-        
+
         });
 
         $scope.employees = tmpObj;
