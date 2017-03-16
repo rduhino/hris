@@ -30,6 +30,20 @@
                 <img height="230" width="230" ng-src="images/{{ view.employee.number | ConvertIdToImage : '-' : ''}}.jpg?decache={{decache}}" employee-avatar/>
             </label>
 
+            <label class="img-uploader-thumb">
+                  <input id="signature"
+                      type="file"
+                      accept="image/png"
+                      image="cs.image"
+                      resize-max-height="230"
+                      resize-max-width="100"
+                      resize-type="image/png" fileupload/>
+
+                  <img width = '230' height= '80' ng-src="{{add.employee.signature ?  add.employee.signature : 'assets/images/signature-uploader.png'}}"/>
+
+              </label>
+              <div class="clearfix"></div>
+
 	        <div class="clearfix"></div>
 
             <h3 class="gray-text text-center fw-bld mg-tb-5 form-info-1"> {{view.employee.name}} ({{view.employee.nickname}})</h3>
